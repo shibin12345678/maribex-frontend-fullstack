@@ -118,10 +118,12 @@ import { FaRegComment, FaRegHeart } from 'react-icons/fa'
 import { LuSend } from "react-icons/lu";
 import Like from './Like'
 import Comment from './Comment'
+import { useNavigate } from 'react-router-dom'
 
 
 
 function Posted() {
+     const navigate=useNavigate();
        const user = JSON.parse(window.localStorage.getItem('user'))
   const userId=user._id
     const [posts, setPosts] = useState([]);
@@ -228,7 +230,7 @@ function Posted() {
                                     <div className="postProfile"></div>
                                     <div>
                                         <div>
-                                            <span className="postName">{post.postById.username}</span>
+                                            <span className="postName" onClick={()=>navigate("/Users")}>{post.postById.username}</span>
                                             <span className="postDay"> {timeSince(new Date(post.createdAt))} Ago</span>
                                         </div>
                                         <span className="PostDesc">Beast Inside Beats • Vibes</span>
@@ -261,7 +263,7 @@ function Posted() {
                                 </div>
                                 <div>
                                     <div>
-                                        <span className="postName">{post.postById.username}</span>
+                                        <span className="postName" onClick={()=>navigate("/Users")}>{post.postById.username}</span>
                                         <span className="postDay"> {post.body}</span>
                                     </div>
                                     <div>
@@ -314,7 +316,7 @@ function Posted() {
             <div className="commonRow">
               <div className="postProfile"></div>
               <div className="suggestionProfile">
-                <span className="postName">{user.username}</span><br/>
+                <span className="postName" onClick={()=>navigate("/Users")}>{user.username}</span><br/>
                 <span className="followedBy">{user.followers.length} followers</span>
               </div>
             </div>

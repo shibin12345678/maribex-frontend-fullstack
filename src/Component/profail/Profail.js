@@ -71,7 +71,7 @@ const Profail = () => {
           <div className="second-sec">
               <button className="item">1  <span>post</span></button>
               <button  className="item">{user.followers.length}  <span>followers</span></button>
-              <button  className="item">{user.following}   <span>following</span></button>      
+              <button  className="item">{user.following.length}   <span>following</span></button>      
           </div>
           
           <div className="dicription">

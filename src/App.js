@@ -9,6 +9,7 @@ import Home from './Component/Home/Home'
 import { Createpost } from './Component/CreatePost/Createpost'
 import Profail from './Component/profail/Profail.js'
 import EditProfail from './Component/Home/EditProfail.js'
+import Users from './Component/Home/Users.js'
 
 
 
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/createPost" element={<Createpost/>}></Route>
           <Route path='/profail'  element={<Profail/>}></Route>
           <Route path='/EditProfail' element={<EditProfail/>}></Route>
+          <Route path='/Users' element={<Users/>}></Route>
           
         </Routes>
         </BrowserRouter>
