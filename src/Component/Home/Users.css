@@ -1,0 +1,163 @@
+*{
+   background-color: white;
+
+}
+.profail-main-container{
+    display: flex;
+    background-color: white;
+}
+.dp-image-conainer{
+    margin-left: 370px;
+    margin-top: 35px;
+}
+    .dp_image{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: none;
+    object-fit: cover;
+    }
+    .dp-side-box{
+     margin-top: 40px;
+     display: flex;
+     justify-content: space-between;
+     margin-left: 100px;
+      height: 80px;
+    }
+    .butns{   
+       justify-content: space-around;
+        margin-left: 10px; 
+        border-radius: 10px;
+        padding: 5px;
+        width: 115px;
+        height: 30px;
+        border: none;
+        background-color: rgb(227, 227, 227);
+       font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    .follow{
+      
+            justify-content: space-around;
+             margin-left: 10px; 
+             border-radius: 10px;
+             color: #fff;
+             padding: 5px;
+             width: 115px;
+             height: 30px;
+             border: none;
+             background-color: #0064e0;;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+          
+    }
+    .bio{
+
+  color: black;
+  margin-left:630px; 
+
+    }
+    .statuss{
+        
+        margin-top: 50px;
+        display: flex;
+        margin-left: 300px;
+        
+     
+    }
+.subStatuss{
+    
+      margin-left: 20px;
+        height: 80px;
+        width: 80px;
+        border-radius: 80px;
+        border: 1px solid var(--liteColor);
+        background-image: url('../Assets/me.png');
+        background-position: center;
+        background-size: cover;
+    }
+ .name{
+        text-align: center;
+    }
+.ellipsiss{
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 50px;
+        font-size: 12px;
+        color: var(--liteColor);
+        text-align: center;
+    }
+ .idd-name{
+ font-size: 20px;
+ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+ font-weight: 100;
+border: none;
+background-color: #fff;
+    }
+.second-secc{
+ margin-left: 620px;
+ margin-top: -90px;
+    }
+.item{
+ border: none;
+ background-color: white;
+ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  
+
+      
+              }
+ .dicription{
+
+  margin-left: 630px;
+  font-weight: 600;
+  margin-top: 10px;
+              }
+
+.footerr{
+      margin-left: 500px;
+  display: flex;
+  margin-top: -10px;
+      
+      
+}         
+.item-btn{
+
+       margin: 30px;
+       font-size: small;
+       font-weight: 600;
+       border: none;
+    color: gray;
+       
+
+}     
+.line{
+      width: 700px;
+   
+    
+}
+.item-btn:hover{
+       color: black;
+}
+.imagez{
+    
+       width: 300px;
+       height: 250px;
+      
+      
+}
+.post{
+    display: flex; 
+
+    /* width: 200px;
+    height: 250px; */
+}
+.post-item{
+    margin-left: 200px;
+    padding: 30px;
+     width:100px;
+
+}
+.userName{
+
+      font-weight: 500;
+      font-size: 20px;
+}
