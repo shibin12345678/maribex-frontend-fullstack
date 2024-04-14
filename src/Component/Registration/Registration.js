@@ -49,13 +49,13 @@ const Registration = () => {
             <div className='line-1'></div>
           </div>
           <form onSubmit={handleSubmit}>
-            <div className='input-box'>
+            <div className='input-x'>
               <input type="text" name="email" placeholder='Mobile number or email address' className='input' required autoComplete='off' onChange={handleChange} />
             </div>
-            <div className='input-box'>
+            <div className='input-x'>
               <input type="text" name="username" placeholder='Username' className='input' required autoComplete='off' onChange={handleChange} />
             </div>
-            <div className='input-box'>
+            <div className='input-x'>
               <input type="password" name="password" placeholder='Password' className='input' required autoComplete='off' onChange={handleChange} />
             </div>
             <div className='paragraph-reg'>

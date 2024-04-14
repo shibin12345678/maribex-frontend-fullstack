@@ -18,6 +18,7 @@ const Profail = () => {
         const userId = localStorage.getItem('userId');
         const response = await axios.get(`http://localhost:9001/api/getUser/${userId}`);
         setUser(response.data.user);
+        console.log("dddd",response.data.user)
         setLoading(false);
       } catch (error) {
         setError(error.message);
@@ -30,6 +31,7 @@ const Profail = () => {
         const userId = localStorage.getItem('userId');
         const response = await axios.get(`http://localhost:9001/api/post/${userId}`); // Assuming your backend endpoint for getting user posts is '/api/getUserPost/:id'
         setPosts(response.data.posts);
+        
       } catch (error) {
         console.error("Error fetching user posts:", error);
       }
@@ -52,14 +54,14 @@ const Profail = () => {
         <div className="profail-main-container">
         <div className=" dp-image-conainer">
         <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIzq6NgrpIR3NsdunE4LWENb4PIruU1QY_ZywaXhnMRKPg2wdTHaKdtW6XmlrA7L1h7mE&usqp=CAU/x"
+            src={user.profilePic}
             alt=""
             className="dp_image"
           />
         </div>
         <div className="dp-side-box">
           
-            <span className="idd-name"> {user.username}</span>
+            <span className="idd-name"> {user.username}"</span>
           
           <div>
             <button className="butns" onClick={()=>navigate("/EditProfail")}>Edit Profail</button>

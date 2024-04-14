@@ -25,7 +25,8 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post("http://localhost:9001/api/signin", formData);
-      const {  _id, name, email, username } = response.data; 
+      const {  _id, name, email, username } = response.data;
+      console.log(response.data)
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user', JSON.stringify({ _id, name, email, username }));
       localStorage.setItem('userId',_id)
@@ -43,10 +44,10 @@ const Login = () => {
             <img src={instagramLogoImage} alt="" className='instagram-logo' />
           </div>
           <form onSubmit={handleSubmit}> 
-            <div className='input-box'>  
+            <div className='input-x'>  
               <input type="text" name="username" placeholder='Phone number, username, or email address' className='input' required autoComplete='off' onChange={handleChange} />
             </div>
-            <div className='input-box'>
+            <div className='input-x'>
               <input type="password" name="password" placeholder='Password' className='input' required autoComplete='off' onChange={handleChange} />
             </div>
             <div className='login-button-box'>

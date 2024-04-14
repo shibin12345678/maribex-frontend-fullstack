@@ -1,0 +1,17 @@
+.Notification-sec{
+    margin-left: 250px;
+  
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+    border: 1px solid black;
+    width: 400px;
+     height: 100vh;
+   
+    border-top:none;
+}
+.Notfication-Name{
+        font-size: 20px;
+        font-weight: 800;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        margin-left: 10px;
+} 

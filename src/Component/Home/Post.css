@@ -98,7 +98,7 @@
      width: 40px;
      border-radius: 25px;
      border: 1px solid var(--liteColor);
-     background-image: url('../Assets/me.png');
+     /* background-image: url('../Assets/me.png'); */
      background-position: center;
      background-size: cover;
  }

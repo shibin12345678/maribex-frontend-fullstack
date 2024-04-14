@@ -19,19 +19,15 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-const Sidebar = () => {
-  
+ const Sidebar = () => {
+    const profailPic=localStorage.getItem("profilepic")
   const navigate=useNavigate();
-
-  
   const logoutUser = async () => {
     try {
       // Clear the JWT cookie
       document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-  
       // Redirect to the login page
       navigate('/login');
-  
       console.log("User logged out successfully");
     } catch (error) {
       console.error("Error in logout: ", error);
@@ -41,39 +37,37 @@ const Sidebar = () => {
 
   return (
     <>
-    
-    
-    <aside class="sidebar">
-      <header class="sidebar-header">
+ 
+        <aside class="sidebar">
+        <header class="sidebar-header">
         <img  src={instalogo} class="logo-img"/>
         <i class="logo-icon ">
-       < FaInstagram/>
+        < FaInstagram/>
         </i>
-      </header>
-      <nav>
-
+        </header>
+        <nav>
         <button onClick={()=>navigate("/")}>
-          <span>
-            <i ><MdHomeFilled/></i>
-            <span>Home</span>
+        <span>
+         <i ><MdHomeFilled/></i>
+          <span>Home</span>
           </span>
-        </button>
-
-        <button>
+          </button>
+          <button onClick={()=>navigate("/Search")}>
           <span>
-            <i ><IoSearch/></i>
-            <span>Search</span>
+          <i  ><IoSearch/></i>
+          <span onClick={()=>navigate("/Search")}>Search</span>
           </span>
-        </button>
-
-        <button>
+          </button>
+          <button onClick={()=>navigate("/Reels")}>
           <span>
-            <i className='icon'><BiMoviePlay/></i>
-            <span >Reels</span>
-          </span>
-        </button>
 
-        <button>
+
+          <i className='icon'><BiMoviePlay/></i>
+          <span >Reels</span>
+          </span>
+          </button>
+
+        <button  onClick={()=>navigate("/Message")}>
           <span>
             <i >
            < TbMessageDots/>
@@ -82,7 +76,7 @@ const Sidebar = () => {
           </span>
         </button>
 
-        <button>
+        <button onClick={()=>navigate("/Notification")}>
           <span>
             <i >
            <FaRegHeart/>
@@ -114,7 +108,7 @@ const Sidebar = () => {
 
         <button  onClick={()=>navigate("/profail")} >
           <span>
-            <img src="Profile.svg"  style={{borderRadius:"10px"}}/>
+            <img src={profailPic}  style={{borderRadius:"10px"}}/>
             <span >Profile</span>
           </span>
         </button>

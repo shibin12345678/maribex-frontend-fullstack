@@ -16,9 +16,8 @@ import Like from './Like'
 import Comment from './Comment'
 import { useNavigate } from 'react-router-dom'
 
-
-
 function Posted() {
+    const profailPic=localStorage.getItem("profilepic")
      const navigate=useNavigate();
        const user = JSON.parse(window.localStorage.getItem('user'))
   const userId=user._id
@@ -54,14 +53,11 @@ function Posted() {
         setErrorMessage('Network error');
       }
     };
-
     fetchUsers();
   }, []);
 
   return (
   <>
-  
-  
   <div className="main">
   
             <div className="container commonRow">
@@ -123,10 +119,12 @@ function Posted() {
                             <div className="postRow " >
                 
                                 <div className="commonRow">
-                                    <div className="postProfile"></div>
+                                    <div >
+                                                <img  className="postProfile " src={profailPic} alt="" />
+                                    </div>
                                     <div>
                                         <div>
-                                            <span className="postName" onClick={()=>navigate("/Users")}>{post.postById.username}</span>
+                                            <span className="postName" onClick={()=>navigate(`/Users/${post.postById._id}`)}>{post.postById.username}</span>
                                             <span className="postDay"> {timeSince(new Date(post.createdAt))} Ago</span>
                                         </div>
                                         <span className="PostDesc">Beast Inside Beats • Vibes</span>
@@ -159,7 +157,7 @@ function Posted() {
                                 </div>
                                 <div>
                                     <div>
-                                        <span className="postName" onClick={()=>navigate("/Users")}>{post.postById.username}</span>
+                                        <span className="postName" onClick={()=>navigate(`/Users/${post.postById._id}`)}>{post.postById.username}</span>
                                         <span className="postDay"> {post.body}</span>
                                     </div>
                                     <div>
