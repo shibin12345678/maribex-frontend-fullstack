@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css"
 import   "../Sidebar/Sidebar.css"
@@ -15,13 +15,34 @@ import { FaInstagram } from "react-icons/fa";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 
 
 
  const Sidebar = () => {
-    const profailPic=localStorage.getItem("profilepic")
+  const [user, setUser] = useState(null);
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const navigate=useNavigate();
+  
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const userId = localStorage.getItem('userId');
+        const response = await axios.get(`http://localhost:9001/api/getUser/${userId}`);
+        setUser(response.data.user);
+        
+        setLoading(false);
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
+      }
+    };
+    fetchUserProfile();
+  }, []);
+
   const logoutUser = async () => {
     try {
       // Clear the JWT cookie
@@ -108,7 +129,9 @@ import { useNavigate } from 'react-router-dom';
 
         <button  onClick={()=>navigate("/profail")} >
           <span>
-            <img src={profailPic}  style={{borderRadius:"10px"}}/>
+          {user && user.profilePic && (
+                <img src={user.profilePic} alt="Profile" style={{ borderRadius: "10px" }} />
+              )}
             <span >Profile</span>
           </span>
         </button>

@@ -17,7 +17,7 @@ import Comment from './Comment'
 import { useNavigate } from 'react-router-dom'
 
 function Posted() {
-    const profailPic=localStorage.getItem("profilepic")
+    // const profailPic=localStorage.getItem("profilepic")
      const navigate=useNavigate();
        const user = JSON.parse(window.localStorage.getItem('user'))
   const userId=user._id
@@ -120,7 +120,7 @@ function Posted() {
                 
                                 <div className="commonRow">
                                     <div >
-                                                <img  className="postProfile " src={profailPic} alt="" />
+                                                <img  className="postProfile " src={post.postById.profilePic}  alt="" />
                                     </div>
                                     <div>
                                         <div>
@@ -186,7 +186,9 @@ function Posted() {
                 <div className="suggestion">
                     <div className="postRow">
                         <div className="commonRow">
-                            <div className="postProfile"></div>
+                            <div className="postProfile">
+                                <img src="" alt="" />
+                            </div>
                             <div className="suggestionProfile">
                                 <span className="postName">{user.username}</span><br/>
                                 <span className="postDay">{user.username}</span>

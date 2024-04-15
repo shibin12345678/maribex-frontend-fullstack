@@ -25,16 +25,26 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post("http://localhost:9001/api/signin", formData);
-      const {  _id, name, email, username } = response.data;
-      console.log(response.data)
+      const { _id, name, email, username } = response.data;
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user', JSON.stringify({ _id, name, email, username }));
-      localStorage.setItem('userId',_id)
-      navigate('/'); // page upon successful login
+      localStorage.setItem('userId', _id);
+      navigate('/'); // Redirect to homepage upon successful login
     } catch (error) {
-      setError(error.response.data.error || 'An error occurred during login');
+      if (error.response) {
+        // Server responded with an error status code
+        const errorMessage = error.response.data.error || 'An error occurred during login';
+        setError(errorMessage);
+      } else if (error.request) {
+        // Request made but no response received
+        setError('No response received from the server');
+      } else {
+        // Something happened in setting up the request
+        setError('An error occurred while processing the request');
+      }
     }
-  };
+  }; 
+  
 
   return (
     <>
