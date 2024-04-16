@@ -15,15 +15,19 @@ import { LuSend } from "react-icons/lu";
 import Like from './Like'
 import Comment from './Comment'
 import { useNavigate } from 'react-router-dom'
+import ViewallComment from './ViewallComment'
 
-function Posted() {
+function Posted({ postId, userId }) {
     // const profailPic=localStorage.getItem("profilepic")
      const navigate=useNavigate();
        const user = JSON.parse(window.localStorage.getItem('user'))
-  const userId=user._id
+  
+  
     const [posts, setPosts] = useState([]);
     const [users, setUsers] = useState([]);
     const [errorMessage, setErrorMessage] = useState(null);
+    const [commentText, setCommentText] = useState('');
+   
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -43,6 +47,7 @@ function Posted() {
       try {
         const response = await fetch("http://localhost:9001/api/users");
         const data = await response.json();
+       
         if (response.ok) {
           setUsers(data.Users);
         } else {
@@ -55,62 +60,49 @@ function Posted() {
     };
     fetchUsers();
   }, []);
+  
+  const handlePostComment = async (postId) => {
+    try {
+      const response = await fetch(`http://localhost:9001/api/post/comments/${postId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId, text: commentText }),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to post comment');
+      }
+     
+      setCommentText(''); 
+    } catch (error) {
+      console.error('Error posting comment:', error);
+    
+    }
+  };
 
   return (
   <>
   <div className="main">
-  
             <div className="container commonRow">
                 <div className="post">
                     <div className="commonRow">
-                        <div className="status">
-                            <div className="subStatus"></div>
-                            <div className="name">
-                                <span className="ellipsis">Kishore</span>
-                            </div>
-                        </div>
-                        <div className="status">
-                            <div className="subStatus"></div>
-                            <div className="name">
-                                <span className="ellipsis">Kishore</span>
-                            </div>
-                        </div>
-                        <div className="status">
-                            <div className="subStatus"></div>
-                            <div className="name">
-                                <span className="ellipsis">Kishore</span>
-                            </div>
-                        </div>
-                        <div className="status">
-                            <div className="subStatus"></div>
-                            <div className="name">
-                                <span className="ellipsis">Kishore</span>
-                            </div>
-                        </div>
-                        <div className="status">
-                            <div className="subStatus"></div>
-                            <div className="name">
-                                <span className="ellipsis">Kishore</span>
-                            </div>
-                        </div>
-                        <div className="status">
-                            <div className="subStatus"></div>
-                            <div className="name">
-                                <span className="ellipsis">Kishore</span>
-                            </div>
-                        </div>
-                        <div className="status">
-                            <div className="subStatus"></div>
-                            <div className="name">
-                                <span className="ellipsis">Kishore</span>
-                            </div>
-                        </div>
-                        <div className="status">
-                            <div className="subStatus"></div>
-                            <div className="name">
-                                <span className="ellipsis">Kishore</span>
-                            </div>
-                        </div>
+                       
+                    {users.map((user, index) => (
+    <div className="status" key={index}>
+        <div>
+            <img src={user.profilePic} alt="" className="subStatus" />
+        </div>
+        <div className="name">
+        <a href={`/Users/${user._id}`} className="ellipsis" >{user.username}</a>
+        </div>
+    </div>
+))}
+
+                       
+                       
+                        
+                       
                     </div>
                     <div>
                     {posts.map((post, index) => (
@@ -137,8 +129,8 @@ function Posted() {
                                 <div className="postRow">
                                     <div className="activity" style={{display:"flex"}} >
                                         
-                                      <Like postId={post._id} />
-                                      <Comment/>
+                                      <Like postId={post._id}  userId={user._id}/>
+                                      <Comment  postId={postId} userId={userId}  />
                     
                  
                <button  className='button'>
@@ -153,16 +145,26 @@ function Posted() {
                                         <div className="likedProfile"></div>
                                         <div className="likedProfile1"></div>
                                     </div>
-                                    <span className="likeCount">{post.likes.length} likes</span>
+                                    <span className="likeCount">{post?.likes?.length} likes</span>
                                 </div>
                                 <div>
                                     <div>
-                                        <span className="postName" onClick={()=>navigate(`/Users/${post.postById._id}`)}>{post.postById.username}</span>
-                                        <span className="postDay"> {post.body}</span>
+                                        {/* <span className="postName" onClick={()=>navigate(`/Users/${post.postById._id}`)}>{post.postById.username}</span>
+                                        <span className="postDay"> {post.body}</span> */}
+                                           <ViewallComment />
                                     </div>
                                     <div>
                                         <div className="postRow">
-                                            <span className="addComment">Add a comment...</span>
+                                            <span className="addComment">
+                                            <input
+          type="text"
+          placeholder='Add a comment...'
+          style={{ border: "none" }}
+          value={commentText}
+          onChange={(e) => setCommentText(e.target.value)}
+        />
+                                                <button onClick={()=>handlePostComment(post._id)} style={{border:"none"}} id="btttttn">post</button>
+                                            </span>
                                             <span className="emojiSize">☻</span>
                                         </div>
                                         <div className="commentBorder"></div>
@@ -186,12 +188,12 @@ function Posted() {
                 <div className="suggestion">
                     <div className="postRow">
                         <div className="commonRow">
-                            <div className="postProfile">
-                                <img src="" alt="" />
-                            </div>
+                           
+                                <img src={user.profilePic} alt="" className="postProfile"/>
+                       
                             <div className="suggestionProfile">
-                                <span className="postName">{user.username}</span><br/>
-                                <span className="postDay">{user.username}</span>
+                            <a href={`/Users/${user._id}`} className="postName" >{user.username}</a><br/>
+                               <a href={`/Users/${user._id}`} className="ellipsis" >{user.username}</a>
                             </div>
                         </div>
                         <div>Switch</div>
@@ -210,9 +212,11 @@ function Posted() {
         {users.map(user => (
           <div key={user._id} className="postRow pding">
             <div className="commonRow">
-              <div className="postProfile"></div>
+              <div>
+                <img src={user.profilePic} alt=""  className="postProfile"/>
+              </div>
               <div className="suggestionProfile">
-                <span className="postName" onClick={()=>navigate("/Users")}>{user.username}</span><br/>
+              <a href={`/Users/${user._id}`} className="postName" >{user.username}</a><br/>
                 <span className="followedBy">{user.followers.length} followers</span>
               </div>
             </div>

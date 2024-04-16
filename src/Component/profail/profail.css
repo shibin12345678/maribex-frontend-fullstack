@@ -93,12 +93,13 @@ background-color: #fff;
       
 }
 .post{
-    display: flex; 
+    display: inline-block;
 
     /* width: 200px;
     height: 250px; */
 }
 .post-item{
+  
     margin-left: 200px;
     padding: 30px;
      width:100px;

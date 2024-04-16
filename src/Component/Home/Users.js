@@ -16,21 +16,21 @@ function Users() {
       try {
         const response = await axios.get(`http://localhost:9001/api/getUser/${id}`);
         setUserProfile(response.data.user);
+       
         setIsFollowing(prevState => !prevState);
       } catch (error) {
         console.error(error);
       }
     };
-
+   
     const fetchUserPosts = async () => {
       try {
-        const response = await axios.get(`http://localhost:9001/api/userPosts/${id}`);
+        const response = await axios.get(`http://localhost:9001/api/post/${id}`);
         setUserPosts(response.data.posts);
       } catch (error) {
         console.error('Error fetching user posts:', error);
       }
     };
-
     fetchUserProfile();
     fetchUserPosts();
   }, [id]);
@@ -115,7 +115,6 @@ function Users() {
           {userPosts.map(post => (
             <div key={post._id} className="post-item">
               <img src={post.image} alt="Post" className="imagez" />
-             
             </div>
           ))}
         </div>

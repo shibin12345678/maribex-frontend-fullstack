@@ -61,7 +61,7 @@ const Profail = () => {
         </div>
         <div className="dp-side-box">
           
-            <span className="idd-name"> {user.username}"</span>
+            <span className="idd-name"> {user.username}</span>
           
           <div>
             <button className="butns" onClick={()=>navigate("/EditProfail")}>Edit Profail</button>

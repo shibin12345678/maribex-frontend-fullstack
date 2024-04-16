@@ -154,6 +154,7 @@ background-color: #fff;
     margin-left: 200px;
     padding: 30px;
      width:100px;
+     display: inline-block;
 
 }
 .userName{
