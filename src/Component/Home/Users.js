@@ -68,7 +68,7 @@ function Users() {
         <div className="profail-main-container">
           <div className="dp-image-conainer">
             <img
-              src={userProfile ? userProfile.profilePic : ''}
+              src={userProfile ? userProfile?.profilePic : ''}
               alt=""
               className="dp_image"
             />

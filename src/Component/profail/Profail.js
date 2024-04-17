@@ -3,6 +3,7 @@ import axios from 'axios';
 import Sidebar from "../Sidebar/Sidebar";
 import "./profail.css";
 import { useNavigate } from "react-router-dom";
+import ProfailImage from "./ProfailImage";
 
 
 const Profail = () => {
@@ -25,20 +26,8 @@ const Profail = () => {
         setLoading(false);
       }
     };
-
-    const fetchUserPosts = async () => {
-      try {
-        const userId = localStorage.getItem('userId');
-        const response = await axios.get(`http://localhost:9001/api/post/${userId}`); // Assuming your backend endpoint for getting user posts is '/api/getUserPost/:id'
-        setPosts(response.data.posts);
-        
-      } catch (error) {
-        console.error("Error fetching user posts:", error);
-      }
-    };
-
     fetchUserProfile();
-    fetchUserPosts();
+   
   }, []);
 
   if (loading) return <div>Loading...</div>;
@@ -54,7 +43,7 @@ const Profail = () => {
         <div className="profail-main-container">
         <div className=" dp-image-conainer">
         <img
-            src={user.profilePic}
+            src={user?.profilePic}
             alt=""
             className="dp_image"
           />
@@ -100,14 +89,7 @@ const Profail = () => {
       <div  className="3-section">
     
 
-    <div className="post">
-         
-          {posts.map(post => (
-            <div key={post._id} className="post-item">
-              <img src={post.image} alt="Post" className="imagez" />
-            </div>
-          ))}
-    </div>
+     <ProfailImage/>
       <div className="saved"></div>
       <div className="taged"></div>
 

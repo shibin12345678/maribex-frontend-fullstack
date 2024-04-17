@@ -238,25 +238,47 @@
 }
  .modal-user{
       margin-left: 25px;
+      color: black;
  }
  .comment-sec{
      margin-top: 319px;
      display: flex;
+     position: sticky;
+     bottom: 0;
+     background-color: white;
+     padding: 10px;
  }
  .modal-input{
      height: 50px;
      width: 500px;
      border: none;
+     margin-top: 110px;
+     
  }
  .btn-modal{
     border: none;
        color: blue;
+       margin-top: 90px;
  }
  #btttttn{
        color: blue;
+      
  }
  .nnnn{
      color: gray;
       border: none;
       margin-left: -4;
  }
+ .comm{
+      font-size: 600;
+       margin-left: 20px;
+       font-weight: 500;
+      
+ }
+ .scrollable-section {
+    max-height: 300px; /* Adjust the height as needed */
+    overflow-y: auto;
+  }
+  
+
+ 

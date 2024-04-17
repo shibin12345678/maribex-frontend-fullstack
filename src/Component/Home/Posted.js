@@ -21,8 +21,7 @@ function Posted({ postId, userId }) {
     // const profailPic=localStorage.getItem("profilepic")
      const navigate=useNavigate();
        const user = JSON.parse(window.localStorage.getItem('user'))
-  
-  
+       console.log(user);
     const [posts, setPosts] = useState([]);
     const [users, setUsers] = useState([]);
     const [errorMessage, setErrorMessage] = useState(null);
@@ -33,7 +32,7 @@ function Posted({ postId, userId }) {
       try {
         const response = await fetch("http://localhost:9001/api/allpost");
         const data = await response.json();
-        setPosts(data.posts);
+        setPosts(data?.posts);
       } catch (error) {
         console.error('Error fetching posts:', error);
       }
@@ -47,9 +46,10 @@ function Posted({ postId, userId }) {
       try {
         const response = await fetch("http://localhost:9001/api/users");
         const data = await response.json();
+        console.log(response);
        
         if (response.ok) {
-          setUsers(data.Users);
+          setUsers(data?.Users);
         } else {
           setErrorMessage(data.error || 'Internal server error');
         }
@@ -91,10 +91,10 @@ function Posted({ postId, userId }) {
                     {users.map((user, index) => (
     <div className="status" key={index}>
         <div>
-            <img src={user.profilePic} alt="" className="subStatus" />
+            <img src={user?.profilePic} alt="" className="subStatus" />
         </div>
         <div className="name">
-        <a href={`/Users/${user._id}`} className="ellipsis" >{user.username}</a>
+        <a href={`/Users/${user?._id}`} className="ellipsis" >{user?.username}</a>
         </div>
     </div>
 ))}
@@ -112,7 +112,7 @@ function Posted({ postId, userId }) {
                 
                                 <div className="commonRow">
                                     <div >
-                                                <img  className="postProfile " src={post.postById.profilePic}  alt="" />
+                                                <img  className="postProfile " src={post.postById?.profilePic}  alt="" />
                                     </div>
                                     <div>
                                         <div>
@@ -130,7 +130,7 @@ function Posted({ postId, userId }) {
                                     <div className="activity" style={{display:"flex"}} >
                                         
                                       <Like postId={post._id}  userId={user._id}/>
-                                      <Comment  postId={postId} userId={userId}  />
+                                      <Comment  postId={post._id} userId={user._id}  />
                     
                  
                <button  className='button'>
@@ -151,7 +151,7 @@ function Posted({ postId, userId }) {
                                     <div>
                                         {/* <span className="postName" onClick={()=>navigate(`/Users/${post.postById._id}`)}>{post.postById.username}</span>
                                         <span className="postDay"> {post.body}</span> */}
-                                           <ViewallComment />
+                                           <ViewallComment  postId={post._id} userId={user._id}/>
                                     </div>
                                     <div>
                                         <div className="postRow">
@@ -189,11 +189,11 @@ function Posted({ postId, userId }) {
                     <div className="postRow">
                         <div className="commonRow">
                            
-                                <img src={user.profilePic} alt="" className="postProfile"/>
+                                <img src={user?.profilePic} alt="" className="postProfile"/>
                        
                             <div className="suggestionProfile">
-                            <a href={`/Users/${user._id}`} className="postName" >{user.username}</a><br/>
-                               <a href={`/Users/${user._id}`} className="ellipsis" >{user.username}</a>
+                            <a href={`/Users/${user._id}`} className="postName" >{user?.username}</a><br/>
+                               <a href={`/Users/${user._id}`} className="ellipsis" >{user?.username}</a>
                             </div>
                         </div>
                         <div>Switch</div>
@@ -213,7 +213,7 @@ function Posted({ postId, userId }) {
           <div key={user._id} className="postRow pding">
             <div className="commonRow">
               <div>
-                <img src={user.profilePic} alt=""  className="postProfile"/>
+                <img src={user?.profilePic} alt=""  className="postProfile"/>
               </div>
               <div className="suggestionProfile">
               <a href={`/Users/${user._id}`} className="postName" >{user.username}</a><br/>

@@ -32,7 +32,7 @@ import axios from 'axios';
       try {
         const userId = localStorage.getItem('userId');
         const response = await axios.get(`http://localhost:9001/api/getUser/${userId}`);
-        setUser(response.data.user);
+        setUser(response?.data?.user);
         
         setLoading(false);
       } catch (error) {
@@ -129,8 +129,8 @@ import axios from 'axios';
 
         <button  onClick={()=>navigate("/profail")} >
           <span>
-          {user && user.profilePic && (
-                <img src={user.profilePic} alt="Profile" style={{ borderRadius: "10px" }} />
+          {user && user?.profilePic && (
+                <img src={user?.profilePic} alt="Profile" style={{ borderRadius: "10px" }} />
               )}
             <span >Profile</span>
           </span>

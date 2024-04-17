@@ -46,7 +46,7 @@ const EditProfail = () => {
           'Content-Type': 'multipart/form-data'
         }
       });
-      const updatedImageURL = response.data.user.profilePic;
+      const updatedImageURL = response.data.user?.profilePic;
       setUpdatedImageURL(updatedImageURL); // Set the updated image URL
       localStorage.setItem('profilepic',updatedImageURL)
       toast.success(response.data.message);
