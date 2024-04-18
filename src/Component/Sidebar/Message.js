@@ -2,10 +2,14 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import "./Message.css";
 import axios from "axios";
+import Conversation from "./Conversation";
+import Chat from "./Chat";
+import ChatOnline from "./ChatOnline";
+
 
 const Message = () => {
-  const [users, setUsers] = useState([]);
-  const [selectedUser, setSelectedUser] = useState(null); // State to store the selected user profile
+     const [users, setUsers] = useState([]);
+     const [selectedUser, setSelectedUser] = useState(null); // State to store the selected user profile
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -33,44 +37,55 @@ const Message = () => {
       <div>
         <Sidebar />
       </div>
-      <div className="user">
-        <div className="chat-sec">
-          <span className="mess-ussername">
-            <h1>Shibin_shan</h1>
-          </span>
-          {users.map((user) => (
-            <div className="statussssss" key={user._id}>
-              <img src={user.profilePic} className="subStatusss" />
-              <div className="namesss">
-                <span
-                  className="ellipsisss"
-                  onClick={() => handleClick(user._id)}
-                >
-                  {user.username}
-                </span>
-              </div>
+      
+        <div className="messanger"> 
+        <div className="chatMenu">
+            <div className="chatMenuWrapper">
+              <input type="text" placeholder="Search for friend" className="chatMenuInput" />
+              <Conversation/>
+              <Conversation/>
+              <Conversation/>
+              <Conversation/>
             </div>
-          ))}
+        </div>
+        <div className="chatBox">
+          <div className="chatBoxWrapper">
+            <div className="chatBoxTop">
+                <Chat/>
+                <Chat own={true}/>
+                <Chat/>
+                <Chat/>
+                <Chat/>
+                <Chat/>
+                <Chat/>
+                <Chat/>
+                <Chat/>
+                <Chat/>
+                <Chat/>
+            </div>
+            <div className="chatBoxBottom">
+               <input className="chatMessageInput" type="text" placeholder="write somthing..." />
+               <button  className="chatSubmitButton">send</button>
+            </div>
+          </div>
+        </div>
+        <div className="chatOnline">
+            <div className="chatOnlineWrapper">
+               <ChatOnline/>
+               <ChatOnline/>
+               <ChatOnline/>
+            </div>
+        </div>
         </div>
 
-        <div className="right-section-chat">
-          <div className="username-box">
-            <div className="subStatusss">
-              <span className="chat-username">{selectedUser ? selectedUser.username : 'UserName'}</span>
-            </div>
-          </div>
-          <div className="chat-sectoion-username">
-            <div className="chat-inpu-sec">
-              <input
-                type="text"
-                placeholder="Message..."
-                className="chat-input"
-              />
-              <button className="chat-send">send</button>
-            </div>
-          </div>
-        </div>
-      </div>
+
+
+
+
+
+
+
+
     </>
   );
 };

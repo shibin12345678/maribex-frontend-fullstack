@@ -18,7 +18,7 @@ import Notification from './Component/Sidebar/Notification.js'
 const App = () => {
   return (
     <div>   
-          <BrowserRouter>
+           <BrowserRouter>
           <Routes>
           <Route path='/' element={<Home/>}></Route>
           <Route path='/login' element={<Login/>}></Route>
@@ -31,8 +31,8 @@ const App = () => {
           <Route path='/Reels' element={<Reels/>}></Route>
           <Route path="/Message" element={<Message/>}></Route>
           <Route path='/Notification' element={<Notification/>}></Route>
-        </Routes>
-        </BrowserRouter>
+         </Routes>
+           </BrowserRouter>
         
     </div>
   )
