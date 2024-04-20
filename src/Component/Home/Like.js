@@ -7,7 +7,7 @@ const Like = ({ postId, userId }) => {
   const [liked, setLiked] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+ useEffect(() => {
     const checkLikedStatus = async () => {
       try {
         const response = await axios.get(`http://localhost:9001/api/post/${postId}`);
@@ -24,7 +24,7 @@ const Like = ({ postId, userId }) => {
       }
     };
   
-    checkLikedStatus();
+     checkLikedStatus();
   }, [postId, userId]);
   
 
@@ -36,6 +36,8 @@ const Like = ({ postId, userId }) => {
           if (response.status === 200) {
             setLiked(false);
             setPost(prevPost => ({ ...prevPost, likes: Array.isArray(prevPost.likes) ? prevPost.likes.filter(like => like !== userId) : [] }));
+            // Update like count immediately
+            setPost(prevPost => ({ ...prevPost, likes: Array.isArray(prevPost.likes) ? prevPost.likes.filter(like => like !== userId) : [] }));
           } else {
             console.log('Error unliking');
           }
@@ -43,12 +45,15 @@ const Like = ({ postId, userId }) => {
           await axios.post(`http://localhost:9001/api/post/like/${postId}`, { userId });
           setLiked(true);
           setPost(prevPost => ({ ...prevPost, likes: Array.isArray(prevPost.likes) ? [...prevPost.likes, userId] : [userId] }));
+          // Update like count immediately
+          setPost(prevPost => ({ ...prevPost, likes: Array.isArray(prevPost.likes) ? [...prevPost.likes, userId] : [userId] }));
         }
       }
     } catch (error) {
       console.error('Error liking/unliking post:', error);
     }
   };
+  
 
   return (
     <button className='button' onClick={handleLike}>

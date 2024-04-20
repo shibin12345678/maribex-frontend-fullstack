@@ -6,31 +6,42 @@ import Conversation from "./Conversation";
 import Chat from "./Chat";
 import ChatOnline from "./ChatOnline";
 
-
 const Message = () => {
-     const [users, setUsers] = useState([]);
-     const [selectedUser, setSelectedUser] = useState(null); // State to store the selected user profile
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null); // State to store the selected user profile
+  const [conversation, setConversation] = useState([]);
+  const [currentChat, setCurrentChat] = useState(null); // Changed from setCurrendChat to setCurrentChat
+  const [message, setMessage] = useState([]);
 
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchUserProfile = async () => {
       try {
-        const response = await axios.get("http://localhost:9001/api/users");
-        setUsers(response.data.Users);
+        const userId = localStorage.getItem('userId');
+        const response = await axios.get(`http://localhost:9001/api/getUser/${userId}`);
+        setUser(response.data.user);
+        setLoading(false);
       } catch (error) {
-        console.error("Error fetching users:", error);
+        setError(error.message);
+        setLoading(false);
       }
     };
-    fetchUsers();
+    fetchUserProfile();
   }, []);
 
-  const handleClick = async (userId) => {
-    try {
-      const response = await axios.get(`http://localhost:9001/api/getUser/${userId}`);
-      setSelectedUser(response.data.user);
-    } catch (error) {
-      console.error('Error fetching user profile:', error);
-    }
-  };
+  useEffect(() => {
+    const getConversations = async () => {
+      try {
+        if (user) {
+          const res = await axios.get(`http://localhost:9001/api/conversation/${user._id}`);
+          setConversation(res.data);
+        }
+      } catch (err) {
+        console.log("Error fetching conversations:", err);
+      }
+    };
+    getConversations();
+  }, [user]);
 
   return (
     <>
@@ -38,54 +49,44 @@ const Message = () => {
         <Sidebar />
       </div>
       
-        <div className="messanger"> 
+      <div className="messanger"> 
         <div className="chatMenu">
-            <div className="chatMenuWrapper">
-              <input type="text" placeholder="Search for friend" className="chatMenuInput" />
-              <Conversation/>
-              <Conversation/>
-              <Conversation/>
-              <Conversation/>
-            </div>
+          <div className="chatMenuWrapper">
+            <input type="text" placeholder="Search for friend" className="chatMenuInput" />
+            <Conversation />
+          </div>
         </div>
         <div className="chatBox">
           <div className="chatBoxWrapper">
-            <div className="chatBoxTop">
-                <Chat/>
-                <Chat own={true}/>
-                <Chat/>
-                <Chat/>
-                <Chat/>
-                <Chat/>
-                <Chat/>
-                <Chat/>
-                <Chat/>
-                <Chat/>
-                <Chat/>
-            </div>
-            <div className="chatBoxBottom">
-               <input className="chatMessageInput" type="text" placeholder="write somthing..." />
-               <button  className="chatSubmitButton">send</button>
-            </div>
+          
+                <div className="chatBoxTop">
+                  <Chat />
+                  <Chat own={true} />
+                  <Chat />
+                  <Chat />
+                  <Chat />
+                  <Chat />
+                  <Chat />
+                  <Chat />
+                  <Chat />
+                  <Chat />
+                  <Chat />
+                </div>
+                <div className="chatBoxBottom">
+                  <input className="chatMessageInput" type="text" placeholder="write something..." />
+                  <button className="chatSubmitButton">send</button>
+                </div>
+           
           </div>
         </div>
         <div className="chatOnline">
-            <div className="chatOnlineWrapper">
-               <ChatOnline/>
-               <ChatOnline/>
-               <ChatOnline/>
-            </div>
+          <div className="chatOnlineWrapper">
+            <ChatOnline />
+            <ChatOnline />
+            <ChatOnline />
+          </div>
         </div>
-        </div>
-
-
-
-
-
-
-
-
-
+      </div>
     </>
   );
 };

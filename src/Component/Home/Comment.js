@@ -69,7 +69,6 @@ const Comment = ({ postId, userId }) => {
   const fetchPostData = async () => {
     try {
       const response = await axios.get(`http://localhost:9001/api/postId/${postId}`);
-      console.log(response,"responssssssssss")
       setPostData(response.data.post);
 
     } catch (error) {

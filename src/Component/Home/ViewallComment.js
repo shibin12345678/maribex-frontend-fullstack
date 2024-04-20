@@ -51,7 +51,6 @@ const ViewallComment = ({ postId, userId }) => {
 
     useEffect(() => {
       fetchComments();
-      fetchPostData();
     }, []);
     const fetchComments = async () => {
       try {
@@ -66,15 +65,19 @@ const ViewallComment = ({ postId, userId }) => {
       }
     };
 
+    
+
+  useEffect(() => {
     const fetchPostData = async () => {
       try {
         const response = await axios.get(`http://localhost:9001/api/postId/${postId}`);
         setPostData(response.data.post);
-  
       } catch (error) {
         console.error('Error fetching post data:', error);
       }
     };
+    fetchPostData();
+  }, [postId]);
   return (
 
    <>

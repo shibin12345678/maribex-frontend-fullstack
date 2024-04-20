@@ -1,15 +1,36 @@
-import React from 'react'
-import "./Conversation.css"
+import React, { useEffect, useState } from 'react';
+import "./Conversation.css";
+import axios from 'axios';
 
 function Conversation() {
+  const [followingList, setFollowingList] = useState([]);
+
+  useEffect(() => {
+    const fetchFollowingList = async () => {
+      try {
+        const userId = localStorage.getItem('userId');
+        console.log("User ID:", userId); // Log the user ID
+       
+        const response = await axios.get(`http://localhost:9001/api/followinglist/${userId}`);
+        console.log("Response from server:", response.data); // Log the response from the server
+        setFollowingList(response.data.user.following);
+      } catch (error) {
+        console.error('Error fetching following list:', error);
+      }
+    };
+    fetchFollowingList();
+  }, []);
+
   return (
-   <>
-    <div className='conversation'>
-   <img src="https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960" alt=""  className='conversationImg'/>
-   <span className="conversationName">Jone Doe</span>
-    </div>
-   </>
-  )
+    <>
+      {followingList.map((user) => (
+        <div key={user._id} className='conversation'>
+          <img src={user.profilePic} alt="" className='conversationImg' />
+          <span className="conversationName">{user.username}</span>
+        </div>
+      ))}
+    </>
+  );
 }
 
-export default Conversation
+export default Conversation;

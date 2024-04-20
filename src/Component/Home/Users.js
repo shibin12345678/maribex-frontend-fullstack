@@ -16,8 +16,7 @@ function Users() {
       try {
         const response = await axios.get(`http://localhost:9001/api/getUser/${id}`);
         setUserProfile(response.data.user);
-       
-        setIsFollowing(prevState => !prevState);
+        setIsFollowing(response.data.user?.isFollowing || false);
       } catch (error) {
         console.error(error);
       }
@@ -43,16 +42,15 @@ function Users() {
           userUnfollowId: userProfile._id // Assuming userProfile has the user id
         });
         console.log(response.data.message); // Log success message
+        setIsFollowing(false);
       } else {
         // If not following, follow
         const response = await axios.post(`http://localhost:9001/api/follow/${id}`, {
           userFollowId: userProfile._id // Assuming userProfile has the user id
         });
         console.log(response.data.message); // Log success message
+        setIsFollowing(true);
       }
-      
-      // Toggle follow status based on previous state
-      setIsFollowing(prevState => !prevState);
     } catch (error) {
       console.error('Error:', error.response.data); // Log detailed error message
       // Handle error
@@ -80,7 +78,7 @@ function Users() {
                 <>
                   <span className='userName'>{userProfile.username}</span>
                   <button className="follow" onClick={handleFollow}>
-                    {isFollowing ? "Following" : "Follow"} {/* Change button text based on follow status */}
+                    {isFollowing ? "Unfollow" : "Follow"} {/* Change button text based on follow status */}
                   </button>
                   <button className="butns">Message</button>
                   <img src={dot} height="20px" style={{marginLeft:"7px"}} />     
