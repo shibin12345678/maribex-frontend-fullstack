@@ -89,7 +89,10 @@ const Profail = () => {
       <div  className="3-section">
     
 
-     <ProfailImage/>
+        <ProfailImage   />
+
+
+        
       <div className="saved"></div>
       <div className="taged"></div>
 

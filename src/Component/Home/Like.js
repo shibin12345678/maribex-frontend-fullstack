@@ -11,7 +11,7 @@ const Like = ({ postId, userId }) => {
     const checkLikedStatus = async () => {
       try {
         const response = await axios.get(`http://localhost:9001/api/post/${postId}`);
-        console.log(response, 'responseeeee'); // Add this line for debugging
+        // Add this line for debugging
         if (response.data && response.data.post) {
           const { post } = response.data;
           setPost(post);

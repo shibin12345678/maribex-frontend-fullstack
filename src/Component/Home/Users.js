@@ -9,32 +9,38 @@ function Users() {
   const [userProfile, setUserProfile] = useState(null);
   const [isFollowing, setIsFollowing] = useState(false); 
   const [userPosts, setUserPosts] = useState([]);
+  const [followersCount ,setFollowersCount] = useState([])
+  const [followingCount ,setFollowingCount] = useState([])
+  const [followbtn, setFollowBtn] = useState(false)
   const { id } = useParams(); // Get the userId from URL params
 
+  const fetchUserProfile = async () => {
+    try {
+      const response = await axios.get(`http://localhost:9001/api/getUser/${id}`);
+      setUserProfile(response.data.user);
+      setIsFollowing(response.data.user?.isFollowing || false);
+      setFollowersCount(response.data.user.followers)
+      setFollowingCount(response.data.user.following)
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  const fetchUserPosts = async () => {
+    try {
+      const response = await axios.get(`http://localhost:9001/api/post/${id}`);
+      setUserPosts(response.data.posts);
+    } catch (error) {
+      console.error('Error fetching user posts:', error);
+    }
+  };
   useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const response = await axios.get(`http://localhost:9001/api/getUser/${id}`);
-        setUserProfile(response.data.user);
-        setIsFollowing(response.data.user?.isFollowing || false);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-   
-    const fetchUserPosts = async () => {
-      try {
-        const response = await axios.get(`http://localhost:9001/api/post/${id}`);
-        setUserPosts(response.data.posts);
-      } catch (error) {
-        console.error('Error fetching user posts:', error);
-      }
-    };
-    fetchUserProfile();
-    fetchUserPosts();
-  }, [id]);
+  fetchUserProfile();
+  fetchUserPosts();
+  }, [id, followersCount]);
 
   const handleFollow = async () => {
+    setFollowBtn(!followbtn)
     try {
       if (isFollowing) {
         // If already following, unfollow
@@ -48,9 +54,12 @@ function Users() {
         const response = await axios.post(`http://localhost:9001/api/follow/${id}`, {
           userFollowId: userProfile._id // Assuming userProfile has the user id
         });
+        // console.log(response.data)
         console.log(response.data.message); // Log success message
         setIsFollowing(true);
+        // setFollowersCount(response.data.user.followers)
       }
+      fetchUserProfile();
     } catch (error) {
       console.error('Error:', error.response.data); // Log detailed error message
       // Handle error
@@ -78,7 +87,7 @@ function Users() {
                 <>
                   <span className='userName'>{userProfile.username}</span>
                   <button className="follow" onClick={handleFollow}>
-                    {isFollowing ? "Unfollow" : "Follow"} {/* Change button text based on follow status */}
+                    {followbtn === false ? "Unfollow" : "Follow"}
                   </button>
                   <button className="butns">Message</button>
                   <img src={dot} height="20px" style={{marginLeft:"7px"}} />     
@@ -90,9 +99,9 @@ function Users() {
           </div>
         </div>
         <div className="second-sec">
-          <button className="item">{userProfile ? userProfile.postCount : 'Loading...' } <span>post</span></button>
-          <button  className="item">{userProfile ? userProfile.followersCount : 'Loading...' }  <span>{userProfile ? userProfile.followers.length : 'Loading...' } followers</span></button>
-          <button  className="item">{userProfile ? userProfile.followingCount : 'Loading...' } <span>{userProfile ? userProfile.following.length : 'Loading...' } following</span></button>      
+        <button className="item">{userPosts.length} <span>posts</span></button>
+          <button  className="item">{userProfile ? userProfile.followersCount : 'Loading...' }  <span>{followersCount.length } followers</span></button>
+          <button  className="item">{userProfile ? userProfile.followingCount : 'Loading...' } <span>{followingCount.length } following</span></button>      
         </div>
         <div className="dicription">
           <p>{userProfile ? userProfile.name : 'Loading...'}</p>

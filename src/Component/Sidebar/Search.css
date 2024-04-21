@@ -1,7 +1,7 @@
 .input-box{
 
 
-    margin-left: 270px;     
+       margin-left: 300px; 
     border: 2px solid black;
     width: 400px;
     height: 100vh;
@@ -22,3 +22,26 @@
     height: 40px;
       border-radius: 10px;
 }
+
+.conversationn{
+              
+   align-items: center;
+   padding: 10px;
+   margin-top: 20px;
+
+}
+   .conversationn:hover{
+  background-color: rgb(206, 208, 210);
+}
+   .conversationImgg{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 20px;
+
+}
+.conversationNamee{
+  font-weight: 500;
+}
+

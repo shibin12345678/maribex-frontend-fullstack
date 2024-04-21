@@ -1,7 +1,7 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import "./profail.css";
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material'; // Import Button from MUI
 import { Modal } from '@mui/material';
 
 const style = {
@@ -9,95 +9,86 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 1000,
-    height:500,
+    width:300,
+    height: 500,
     bgcolor: 'background.paper',
     border: "none",
     boxShadow: 24,
     p: 4,
-  };
+};
 
 const ProfailImage = ({ postId, userId }) => {
+
     const [posts, setPosts] = useState([]);
-const [loading, setLoading] = useState(true);
-const [error, setError] = useState(null);
-const [open, setOpen] = React.useState(false);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [open, setOpen] = React.useState(false);
+    const [image, setImage] = useState(null); // Update to null initially
+    const [postData, setPostData] = useState("");
 
-const [postData, setPostData] = useState(null);
+    const handleOpen = (imageSrc) => {
+        setImage(imageSrc); // Set the clicked image to the state
+        setOpen(true);
+    }
 
-const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    console.log(postId)
-      
     useEffect(() => {
-      
-     
-  
-      const fetchPostData = async () => {
-        try {
-          const response = await axios.get(`http://localhost:9001/api/postId/${postId}`);
-          console.log( response,"shsssjsjjsjsjjsjsj")
-          setPostData(response.data.post);
-    
-        } catch (error) {
-          console.error('Error fetching post data:', error);
-        }
-      };
-      fetchPostData();
+        const fetchUserPosts = async () => {
+            try {
+                const userId = localStorage.getItem('userId');
+                const response = await axios.get(`http://localhost:9001/api/post/${userId}`);
+                setPosts(response?.data?.posts);
+            } catch (error) {
+                console.error("Error fetching user posts:", error);
+            }
+        };
+        fetchUserPosts();
     }, []);
 
+  
+    const handleDelete = async (postId) => {
+      try {
+          const response = await axios.delete(`http://localhost:9001/api/post/${postId}`);
+          console.log(response.data.message ,"delted"); // Log the response message from the server
+          // Optionally, you can update the state to remove the deleted post from the UI
+      } catch (error) {
+          console.error("Error deleting post:", error);
+      }
+  }
+    return (
+        <>
+            <div className="post">
+                {posts.map(post => (
+                    <div key={post._id} className="post-item">
+                        <img
+                            src={post.image}
+                            alt="Post"
+                            className="imagez"
+                            onClick={() => handleOpen(post.image)} // Pass the image source to handleOpen
+                        />
+                          < button  style={{color:"black"}} onClick={() => handleDelete(post._id)}>Delete</button>
+                    </div>
+                ))}
+            </div>
 
-
-useEffect(() => {
-    const fetchUserPosts = async () => {
-        try {
-          const userId = localStorage.getItem('userId');
-          const response = await axios.get(`http://localhost:9001/api/post/${userId}`); // Assuming your backend endpoint for getting user posts is '/api/getUserPost/:id'
-          setPosts(response?.data?.posts);
-          
-        } catch (error) {
-          console.error("Error fetching user posts:", error);
-        }
-      };
-      fetchUserPosts();  
-}, []);
-
-
-
-  return (
-   <>
-   
-   
-   <div className="post">
-         
-         {posts.map(post => (
-           <div key={post._id} className="post-item">
-             <img src={post.image} alt="Post" className="imagez"  onClick={handleOpen}   />
-           </div>
-         ))}
-   </div>
-
-   <div>
-
-   <Modal className='modall'
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      > 
-        <Box sx={style}>
-          <img src={postData?.image} className='moadal-image' />
-         
-        </Box>
-      </Modal>
-
-   </div>
-   
-   
-   
-   </>
-  )
+            <div>
+                <Modal
+                    className='modall'
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <Box sx={style}>
+                        {image && <img src={image} alt='post_img' className='moadal-image' />}
+                        {/* Add delete button */}
+                      
+                    </Box>
+                </Modal>
+            </div>
+        </>
+    )
 }
 
-export default ProfailImage
+export default ProfailImage;
