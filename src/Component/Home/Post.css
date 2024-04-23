@@ -12,7 +12,9 @@
      display: flex;
      margin-left: 200px;
  
-     
+     .postContainer{
+        margin-left: -800px;
+     }
     
  }
  .sideMenu{

@@ -89,8 +89,10 @@ background-color: #fff;
     
        width: 300px;
        height: 250px;
-      
-      
+       margin-left: 40px;    
+}
+.prof-botton{
+    margin-left: 40px;
 }
 .post{
     display: inline-block;

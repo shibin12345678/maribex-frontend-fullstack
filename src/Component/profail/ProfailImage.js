@@ -38,6 +38,7 @@ const ProfailImage = ({ postId, userId }) => {
             try {
                 const userId = localStorage.getItem('userId');
                 const response = await axios.get(`http://localhost:9001/api/post/${userId}`);
+               
                 setPosts(response?.data?.posts);
             } catch (error) {
                 console.error("Error fetching user posts:", error);
@@ -45,6 +46,9 @@ const ProfailImage = ({ postId, userId }) => {
         };
         fetchUserPosts();
     }, []);
+
+
+
 
   
     const handleDelete = async (postId) => {
@@ -65,9 +69,8 @@ const ProfailImage = ({ postId, userId }) => {
                             src={post.image}
                             alt="Post"
                             className="imagez"
-                            onClick={() => handleOpen(post.image)} // Pass the image source to handleOpen
-                        />
-                          < button  style={{color:"black"}} onClick={() => handleDelete(post._id)}>Delete</button>
+                            onClick={() => handleOpen(post.image)}/>
+                          < button className='prof-botton'  style={{color:"black"}} onClick={() => handleDelete(post._id)}>Delete</button>
                     </div>
                 ))}
             </div>
@@ -82,7 +85,7 @@ const ProfailImage = ({ postId, userId }) => {
                 >
                     <Box sx={style}>
                         {image && <img src={image} alt='post_img' className='moadal-image' />}
-                        {/* Add delete button */}
+                    
                       
                     </Box>
                 </Modal>

@@ -42,10 +42,12 @@ const EditProfail = () => {
       const id = localStorage.getItem('userId');
 
       const response = await axios.patch(`http://localhost:9001/api/updateProfile/${id}`, formDataToSend, {
+
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
+      console.log(response,"deee")
       const updatedImageURL = response.data.user?.profilePic;
       setUpdatedImageURL(updatedImageURL); // Set the updated image URL
       localStorage.setItem('profilepic',updatedImageURL)

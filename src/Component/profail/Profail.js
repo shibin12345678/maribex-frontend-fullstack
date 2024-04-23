@@ -18,6 +18,7 @@ const Profail = () => {
       try {
         const userId = localStorage.getItem('userId');
         const response = await axios.get(`http://localhost:9001/api/getUser/${userId}`);
+          console.log(response,"sjsjsjsjsjsjsjj")
         setUser(response.data.user);
         // console.log("dddd",response.data.user)
         setLoading(false);
@@ -29,6 +30,19 @@ const Profail = () => {
     fetchUserProfile();
    
   }, []);
+
+  useEffect(() => {
+    const fetchUserPosts = async () => {
+        try {
+            const userId = localStorage.getItem('userId');
+            const response = await axios.get(`http://localhost:9001/api/post/${userId}`);
+            setPosts(response?.data?.posts);
+        } catch (error) {
+            console.error("Error fetching user posts:", error);
+        }
+    };
+    fetchUserPosts();
+}, []);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -60,13 +74,13 @@ const Profail = () => {
           </div>
           </div>
           <div className="second-sec">
-              <button className="item">1  <span>post</span></button>
+              <button className="item">{posts.length}  <span>post</span></button>
               <button  className="item">{user.followers.length}  <span>followers</span></button>
               <button  className="item">{user.following.length}   <span>following</span></button>      
           </div>
           
           <div className="dicription">
-                      <p>shibin shan</p>
+                      <p>{user?.bio}</p>
           </div>
 
           {/* <hr className="line" /> */}
@@ -89,7 +103,7 @@ const Profail = () => {
       <div  className="3-section">
     
 
-        <ProfailImage   />
+        <ProfailImage  />
 
 
         

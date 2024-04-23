@@ -88,23 +88,23 @@ import axios from 'axios';
           </span>
           </button>
 
-        {/* <button  onClick={()=>navigate("/Message")}>
+        <button  onClick={()=>navigate("/Message")}>
           <span>
             <i >
            < TbMessageDots/>
             </i>
             <span>Messages</span>
           </span>
-        </button> */}
+        </button>
 
-        <button onClick={()=>navigate("/Notification")}>
+        {/* <button onClick={()=>navigate("/Notification")}>
           <span>
             <i >
            <FaRegHeart/>
             </i>
             <span>Notifications</span>
           </span>
-        </button>
+        </button> */}
 
 
 

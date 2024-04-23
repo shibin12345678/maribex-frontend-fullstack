@@ -6,11 +6,10 @@ function Conversation() {
   const [followingList, setFollowingList] = useState([]);
 
   useEffect(() => {
-    const fetchFollowingList = async () => {
-      try {
+        const fetchFollowingList = async () => {
+        try {
         const userId = localStorage.getItem('userId');
         console.log("User ID:", userId); // Log the user ID
-       
         const response = await axios.get(`http://localhost:9001/api/followinglist/${userId}`);
         console.log("Response from server:", response.data); // Log the response from the server
         setFollowingList(response.data.user.following);
