@@ -1,21 +1,41 @@
-.conversation{
+.MainContactContainer{
+     flex: 0.7;
+     background-color: black;
+     height: 100vh;
+     
+   
+
+}
+.searchBarForContact{
+    width: 19pc;
+    height: 6vh;
+    border-radius: 10px;
+    background-color: rgb(191, 196, 196);
+    margin-left: -10px;
+    
+}
+.chatUserImg{
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-left: 10px;
+}
+.userContainer{
       display: flex;
-      align-items: center;
-      padding: 10px;
-      margin-top: 20px;
-
+      background-color: rgb(191, 196, 196);
+      padding: 6px;
+      border-radius: 10px;
+      margin-top: 6px;
 }
-.conversation:hover{
-    background-color: rgb(206, 208, 210);
+.uuu{
+    background-color: rgb(191, 196, 196) ;
 }
-.conversationImg{
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 20px;
-
+.ttt{
+    background-color:rgb(191, 196, 196) ;
 }
-.conversationName{
-    font-weight: 500;
+.userDetailContainer{
+      height: 90vh;
+      overflow: hidden;
+      overflow-y: scroll;
 }

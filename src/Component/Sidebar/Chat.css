@@ -1,39 +1,44 @@
-.message{
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-
+.MainChatContainer{
+    flex: 2.9;
 }
-.messageTop{
-    display: flex;
-
-
-}
-.messageImg{
-    width: 32px;
-    height: 32px;
+.userProfail{
+    width:45px;
+    height: 45px;
     border-radius: 50%;
-    object-fit: cover;
-    margin-right: 10px;
 }
-.messageText{
-    padding: 10px;
-  border-radius: 20px;
-  background-color: #94a8c1;
-  color: #fff;
-  max-width: 300px;
+.chatUserProfailc{
+  width: 40px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 10px;
   
 }
-.messageBottom{
-    font-size: 12px;
+.msgContainer{
+    height: 75vh;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+.msgInput{
+     width: 400px;
+     height: 40px;
+     margin-left: 30px;
+     margin-top: 5px;
+     background-color: rgb(177, 182, 182);
+      border-radius: 10px;
+
+
+}
+.sendMsgCon{
+       display: flex;
+}
+.msgBton{
+    margin-left: 10px;
+    width: 50px;
+    height: 34px;
     margin-top: 10px;
+    border-radius: 10px;
 }
-.message.own{
-    align-items: flex-end;
-
+.msgBton:hover{
+    background-color: rgb(190, 182, 182);
 }
-.message.own .messageText{
-    background-color: lightgray;
-    color: black;
-}
-

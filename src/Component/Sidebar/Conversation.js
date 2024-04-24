@@ -1,35 +1,74 @@
-import React, { useEffect, useState } from 'react';
-import "./Conversation.css";
-import axios from 'axios';
+import React from 'react'
+import "./Conversation.css"
 
-function Conversation() {
-  const [followingList, setFollowingList] = useState([]);
-
-  useEffect(() => {
-        const fetchFollowingList = async () => {
-        try {
-        const userId = localStorage.getItem('userId');
-        console.log("User ID:", userId); // Log the user ID
-        const response = await axios.get(`http://localhost:9001/api/followinglist/${userId}`);
-        console.log("Response from server:", response.data); // Log the response from the server
-        setFollowingList(response.data.user.following);
-      } catch (error) {
-        console.error('Error fetching following list:', error);
-      }
-    };
-    fetchFollowingList();
-  }, []);
-
+const Conversation = () => {
   return (
-    <>
-      {followingList.map((user) => (
-        <div key={user._id} className='conversation'>
-          <img src={user.profilePic} alt="" className='conversationImg' />
-          <span className="conversationName">{user.username}</span>
-        </div>
-      ))}
-    </>
-  );
+    <div   >
+           <div>
+              <div  style={{width:"20pc",padding:"10px"}}>
+                 <input type="search" placeholder='Search your friens'  className='searchBarForContact'/>
+              </div>
+              <div className='userDetailContainer' >
+                <div className='userContainer'>
+                  <img src="https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960"  alt="" className='chatUserImg'/>
+                  <div style={{marginLeft:"10px" }} className='uuu'>
+                    <p  style={{textAlign:"start",marginTop:"10px",fontSize:"15px"}} className='ttt'>sumnaa</p>
+                    <p  style={{textAlign:"start",marginTop:"-18px",fontSize:"14px"}} className='ttt'>Open your message</p>
+                  </div>
+                </div>
+                <div className='userContainer'>
+                  <img src="https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960"  alt="" className='chatUserImg'/>
+                  <div style={{marginLeft:"10px" }} className='uuu'>
+                    <p  style={{textAlign:"start",marginTop:"10px",fontSize:"15px"}} className='ttt'>sumnaa</p>
+                    <p  style={{textAlign:"start",marginTop:"-18px",fontSize:"14px"}} className='ttt'>Open your message</p>
+                  </div>
+                </div>
+                <div className='userContainer'>
+                  <img src="https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960"  alt="" className='chatUserImg'/>
+                  <div style={{marginLeft:"10px" }} className='uuu'>
+                    <p  style={{textAlign:"start",marginTop:"10px",fontSize:"15px"}} className='ttt'>sumnaa</p>
+                    <p  style={{textAlign:"start",marginTop:"-18px",fontSize:"14px"}} className='ttt'>Open your message</p>
+                  </div>
+                </div>
+                <div className='userContainer'>
+                  <img src="https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960"  alt="" className='chatUserImg'/>
+                  <div style={{marginLeft:"10px" }} className='uuu'>
+                    <p  style={{textAlign:"start",marginTop:"10px",fontSize:"15px"}} className='ttt'>sumnaa</p>
+                    <p  style={{textAlign:"start",marginTop:"-18px",fontSize:"14px"}} className='ttt'>Open your message</p>
+                  </div>
+                </div>
+                <div className='userContainer'>
+                  <img src="https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960"  alt="" className='chatUserImg'/>
+                  <div style={{marginLeft:"10px" }} className='uuu'>
+                    <p  style={{textAlign:"start",marginTop:"10px",fontSize:"15px"}} className='ttt'>sumnaa</p>
+                    <p  style={{textAlign:"start",marginTop:"-18px",fontSize:"14px"}} className='ttt'>Open your message</p>
+                  </div>
+                </div>
+                <div className='userContainer'>
+                  <img src="https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960"  alt="" className='chatUserImg'/>
+                  <div style={{marginLeft:"10px" }} className='uuu'>
+                    <p  style={{textAlign:"start",marginTop:"10px",fontSize:"15px"}} className='ttt'>sumnaa</p>
+                    <p  style={{textAlign:"start",marginTop:"-18px",fontSize:"14px"}} className='ttt'>Open your message</p>
+                  </div>
+                </div>
+                <div className='userContainer'>
+                  <img src="https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960"  alt="" className='chatUserImg'/>
+                  <div style={{marginLeft:"10px" }} className='uuu'>
+                    <p  style={{textAlign:"start",marginTop:"10px",fontSize:"15px"}} className='ttt'>sumnaa</p>
+                    <p  style={{textAlign:"start",marginTop:"-18px",fontSize:"14px"}} className='ttt'>Open your message</p>
+                  </div>
+                </div>
+                <div className='userContainer'>
+                  <img src="https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960"  alt="" className='chatUserImg'/>
+                  <div style={{marginLeft:"10px" }} className='uuu'>
+                    <p  style={{textAlign:"start",marginTop:"10px",fontSize:"15px"}} className='ttt'>sumnaa</p>
+                    <p  style={{textAlign:"start",marginTop:"-18px",fontSize:"14px"}} className='ttt'>Open your message</p>
+                  </div>
+                </div>
+              </div>
+           </div>
+    </div>
+  )
 }
 
-export default Conversation;
+export default Conversation
