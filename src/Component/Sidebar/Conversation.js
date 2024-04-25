@@ -1,74 +1,57 @@
-import React from 'react'
-import "./Conversation.css"
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import "./Conversation.css";
+import { useParams } from 'react-router-dom';
+import Chat from './Chat'
 
 const Conversation = () => {
-  return (
-    <div   >
-           <div>
-              <div  style={{width:"20pc",padding:"10px"}}>
-                 <input type="search" placeholder='Search your friens'  className='searchBarForContact'/>
-              </div>
-              <div className='userDetailContainer' >
-                <div className='userContainer'>
-                  <img src="https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960"  alt="" className='chatUserImg'/>
-                  <div style={{marginLeft:"10px" }} className='uuu'>
-                    <p  style={{textAlign:"start",marginTop:"10px",fontSize:"15px"}} className='ttt'>sumnaa</p>
-                    <p  style={{textAlign:"start",marginTop:"-18px",fontSize:"14px"}} className='ttt'>Open your message</p>
-                  </div>
-                </div>
-                <div className='userContainer'>
-                  <img src="https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960"  alt="" className='chatUserImg'/>
-                  <div style={{marginLeft:"10px" }} className='uuu'>
-                    <p  style={{textAlign:"start",marginTop:"10px",fontSize:"15px"}} className='ttt'>sumnaa</p>
-                    <p  style={{textAlign:"start",marginTop:"-18px",fontSize:"14px"}} className='ttt'>Open your message</p>
-                  </div>
-                </div>
-                <div className='userContainer'>
-                  <img src="https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960"  alt="" className='chatUserImg'/>
-                  <div style={{marginLeft:"10px" }} className='uuu'>
-                    <p  style={{textAlign:"start",marginTop:"10px",fontSize:"15px"}} className='ttt'>sumnaa</p>
-                    <p  style={{textAlign:"start",marginTop:"-18px",fontSize:"14px"}} className='ttt'>Open your message</p>
-                  </div>
-                </div>
-                <div className='userContainer'>
-                  <img src="https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960"  alt="" className='chatUserImg'/>
-                  <div style={{marginLeft:"10px" }} className='uuu'>
-                    <p  style={{textAlign:"start",marginTop:"10px",fontSize:"15px"}} className='ttt'>sumnaa</p>
-                    <p  style={{textAlign:"start",marginTop:"-18px",fontSize:"14px"}} className='ttt'>Open your message</p>
-                  </div>
-                </div>
-                <div className='userContainer'>
-                  <img src="https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960"  alt="" className='chatUserImg'/>
-                  <div style={{marginLeft:"10px" }} className='uuu'>
-                    <p  style={{textAlign:"start",marginTop:"10px",fontSize:"15px"}} className='ttt'>sumnaa</p>
-                    <p  style={{textAlign:"start",marginTop:"-18px",fontSize:"14px"}} className='ttt'>Open your message</p>
-                  </div>
-                </div>
-                <div className='userContainer'>
-                  <img src="https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960"  alt="" className='chatUserImg'/>
-                  <div style={{marginLeft:"10px" }} className='uuu'>
-                    <p  style={{textAlign:"start",marginTop:"10px",fontSize:"15px"}} className='ttt'>sumnaa</p>
-                    <p  style={{textAlign:"start",marginTop:"-18px",fontSize:"14px"}} className='ttt'>Open your message</p>
-                  </div>
-                </div>
-                <div className='userContainer'>
-                  <img src="https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960"  alt="" className='chatUserImg'/>
-                  <div style={{marginLeft:"10px" }} className='uuu'>
-                    <p  style={{textAlign:"start",marginTop:"10px",fontSize:"15px"}} className='ttt'>sumnaa</p>
-                    <p  style={{textAlign:"start",marginTop:"-18px",fontSize:"14px"}} className='ttt'>Open your message</p>
-                  </div>
-                </div>
-                <div className='userContainer'>
-                  <img src="https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960"  alt="" className='chatUserImg'/>
-                  <div style={{marginLeft:"10px" }} className='uuu'>
-                    <p  style={{textAlign:"start",marginTop:"10px",fontSize:"15px"}} className='ttt'>sumnaa</p>
-                    <p  style={{textAlign:"start",marginTop:"-18px",fontSize:"14px"}} className='ttt'>Open your message</p>
-                  </div>
-                </div>
-              </div>
-           </div>
-    </div>
-  )
-}
+    const userId=localStorage.getItem("userId")
+    
+    const [currentChatUser,setCurrectChatUser]=useState("")
+  const [followingList, setFollowingList] = useState([]);
 
-export default Conversation
+  useEffect(() => {
+    const fetchFollowingList = async () => {
+      try {
+        const response = await axios.get(`http://localhost:9001/api/followinglist/${userId}`); 
+        setFollowingList(response.data.user.following);
+
+      } catch (error) {
+        console.error('Error fetching following list:', error);
+      }
+    };
+
+    fetchFollowingList();
+  }, []);
+   const handleUser=(e)=>{
+
+     setCurrectChatUser(e)
+   }
+  return (
+    <div style={{display:"flex"}}>
+      <div>
+        <div style={{ width: "20pc", padding: "10px" }}>
+          <input type="search" placeholder='Search your friends' className='searchBarForContact' />
+        </div>
+        <div className='userDetailContainer'>
+          {followingList.map((user) => (
+            <div className='userContainer' key={user._id} onClick={(e)=>handleUser(user)}>
+              <img src={user.profilePic} alt={user.username} className='chatUserImg' />
+              <div style={{ marginLeft: "10px" }} className='uuu'>
+                <p style={{ textAlign: "start", marginTop: "10px", fontSize: "15px" }} className='ttt'>{user.username}</p>
+                <p style={{ textAlign: "start", marginTop: "-18px", fontSize: "14px" }} className='ttt'>Open your message</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      {currentChatUser !=="" ?
+      <Chat currentChatUser={currentChatUser}/>:<div style={{marginLeft:"150px",marginTop:"200px"}}>
+         <p style={{fontSize:"30px",textAlign:"center", color:'lightBlue'}}>Open Chat Message with friends</p>
+      </div>
+        }
+    </div>
+  );
+};
+
+export default Conversation;

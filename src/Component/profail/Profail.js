@@ -18,7 +18,7 @@ const Profail = () => {
       try {
         const userId = localStorage.getItem('userId');
         const response = await axios.get(`http://localhost:9001/api/getUser/${userId}`);
-          console.log(response,"sjsjsjsjsjsjsjj")
+         
         setUser(response.data.user);
         // console.log("dddd",response.data.user)
         setLoading(false);

@@ -1,7 +1,7 @@
 import React from 'react'
 import Sidebar from './Sidebar'
 import Conversation from './Conversation'
-import Chat from './Chat'
+// import Chat from './Chat'
 
 const Message = () => {
   return (
@@ -15,7 +15,7 @@ const Message = () => {
           <div>
           <Conversation/>
           </div>
-         <div><Chat/></div>
+         {/* <div><Chat/></div> */}
          
 
 
