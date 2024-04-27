@@ -81,7 +81,7 @@ const Comment = ({ postId, userId }) => {
     <>
     <div>
       <button className='button' onClick={handleOpen}>
-        <FaRegComment />
+        <FaRegComment   style={{marginLeft:"-59px"}} />
       </button>
       <Modal className='modall'
         open={open}

@@ -18,7 +18,6 @@ function Posted({ postId, userId }) {
   // const profailPic=localStorage.getItem("profilepic")
   const navigate = useNavigate();
   const user = JSON.parse(window.localStorage.getItem("user"));
-  console.log(user);
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -43,7 +42,6 @@ function Posted({ postId, userId }) {
       try {
         const response = await fetch("http://localhost:9001/api/users");
         const data = await response.json();
-        console.log(response);
 
         if (response.ok) {
           setUsers(data?.Users);
@@ -138,32 +136,20 @@ function Posted({ postId, userId }) {
                   </div>
                   <div>
                     <img src={post.image} height="500px" className="img" />
+                     
                     <div className="postRow">
                       <div className="activity" style={{ display: "flex" }}>
                         <Like postId={post._id} userId={user._id} />
+                      
                         <Comment postId={post._id} userId={user._id} />
-
                         <button className="button">
-                          <LuSend />
+                          <LuSend style={{marginLeft:"-30px",marginTop:"-15px"}}/>
                         </button>
                       </div>
                       <img src={save} height="30px" />
                     </div>
-                    <div className="commonRow">
-                      <div className="liked">
-                        <div className="likedProfile"></div>
-                        <div className="likedProfile1"></div>
-                      </div>
-                      <span className="likeCount">
-                        {post?.likes?.length} likes
-                      </span>
-                    </div>
                     <div>
-                      <div>
-                        {/* <span className="postName" onClick={()=>navigate(`/Users/${post.postById._id}`)}>{post.postById.username}</span>
-                                        <span className="postDay"> {post.body}</span> */}
-                        <ViewallComment postId={post._id} userId={user._id} />
-                      </div>
+                      <ViewallComment postId={post._id} userId={user._id} />
                       <div>
                         <div className="postRow">
                           <span className="addComment">
@@ -197,7 +183,6 @@ function Posted({ postId, userId }) {
             <div className="postRow">
               <div className="commonRow">
                 <img src={user?.profilePic} alt="" className="postProfile" />
-
                 <div className="suggestionProfile">
                   <a href={`/Users/${user._id}`} className="postName">
                     {user?.username}
@@ -214,9 +199,6 @@ function Posted({ postId, userId }) {
               <div>Suggested for you</div>
               <div className="seeAll">See All</div>
             </div>
-
-            {/* all users */}
-
             <div>
               <div className="user-list">
                 {users.map((user) => (
