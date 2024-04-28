@@ -7,17 +7,19 @@ import { useParams } from 'react-router-dom';
 
 function Users() {
   const [userProfile, setUserProfile] = useState(null);
-  const [isFollowing, setIsFollowing] = useState(false); 
   const [userPosts, setUserPosts] = useState([]);
-  const [followersCount, setFollowersCount] = useState([]);
-  const [followingCount, setFollowingCount] = useState([0]);
-  const [followBtn, setFollowBtn] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState(null);
+  const [logUserId, setLogUserId] = useState(null); // Updated to null
+  const [isFollowing, setIsFollowing] = useState({});
+
   const { id } = useParams(); // Get the userId from URL params
 
   useEffect(() => {
-    // Retrieve follow status from local storage
     const followStatus = localStorage.getItem(`follow_${id}`);
-    const userId = localStorage.getItem('userId')
+    const userId = localStorage.getItem('userId');
+    setLogUserId(userId); // Set the logged-in user ID
+
     if (followStatus) {
       setIsFollowing(JSON.parse(followStatus));
     }
@@ -30,8 +32,6 @@ function Users() {
     try {
       const response = await axios.get(`http://localhost:9001/api/getUser/${id}`);
       setUserProfile(response.data.user);
-      setFollowersCount(response.data.user.followers);
-      setFollowingCount(response.data.user.following);
     } catch (error) {
       console.error(error);
     }
@@ -46,35 +46,32 @@ function Users() {
     }
   };
 
- const handleFollow = async () => {
-  setFollowBtn(!isFollowing); // Toggle follow status
-  localStorage.setItem(`follow_${id}`, JSON.stringify(!isFollowing)); // Update local storage
-  try {
-    if (isFollowing) {
-      // If already following, unfollow
-      const response = await axios.post(`http://localhost:9001/api/unfollow/${id}`, {
-        userUnfollowId: userProfile._id // Assuming userProfile has the user id
-      });
-      console.log(response.data.message); // Log success message
-      setIsFollowing(false); // Update follow status
-      setFollowingCount(prevCount => prevCount - 1); // Decrement following count
-    } else {
-      // If not following, follow
-      const response = await axios.post(`http://localhost:9001/api/follow/${id}`, {
-        userFollowId: userProfile._id // Assuming userProfile has the user id
-      });
-      console.log(response.data.message); // Log success message
-      setIsFollowing(true); // Update follow status
-      setFollowingCount(prevCount => prevCount + 1); // Increment following count
-    }
-    fetchUserProfile(); // Fetch updated user profile
-  } catch (error) {
-    console.error('Error:', error.response.data); // Log detailed error message
-    // Handle error
-  }
-};
+  const handleFollow = async (userId) => {
+    try {
+      const followingState = { ...isFollowing };
 
-  
+      if (followingState[userId]) {
+        await axios.post(
+          `http://localhost:9001/api/unfollow/${logUserId}`,
+          { userUnfollowId: userId }
+        );
+        followingState[userId] = false;
+      } else {
+        await axios.post(
+          `http://localhost:9001/api/follow/${logUserId}`,
+          { userFollowId: userId }
+        );
+        followingState[userId] = true;
+      }
+      setIsFollowing(followingState);
+      
+      // Update local storage
+      localStorage.setItem(`follow_${id}`, JSON.stringify(followingState));
+    } catch (error) {
+      console.error(error, "follow");
+    }
+  };
+
   return (
     <>
       <div>
@@ -95,8 +92,10 @@ function Users() {
               {userProfile ? (
                 <>
                   <span className='userName'>{userProfile.username}</span>
-                  <button className="follow" onClick={handleFollow}>
-                    {isFollowing ? "Unfollow" : "Follow"}
+                  <button className="follow" onClick={() => handleFollow(userProfile._id)}>
+                    {isFollowing[userProfile._id]
+                      ? "Following"
+                      : "Follow"}
                   </button>
                   <button className="butns">Message</button>
                   <img src={dot} height="20px" style={{marginLeft:"7px"}} />     
@@ -109,7 +108,7 @@ function Users() {
         </div>
         <div className="second-sec">
           <button className="item">{userPosts.length} <span>posts</span></button>
-          <button  className="item">{followersCount.length } followers</button>
+          <button  className="item">0 followers</button>
           <button  className="item">0 following</button>      
         </div>
         <div className="dicription">

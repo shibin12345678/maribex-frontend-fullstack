@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { FaRegHeart, FaHeart } from 'react-icons/fa';
+import { FaRegHeart} from 'react-icons/fa';
+import { FcLike } from "react-icons/fc";
 import axios from 'axios';
 
 const Like = ({ postId, userId }) => {
@@ -11,7 +12,7 @@ const Like = ({ postId, userId }) => {
     const fetchPost = async () => {
       try {
         const response = await axios.get(`http://localhost:9001/api/postId/${postId}`);
-         console.log("response",response)
+        //  console.log("responseeee",response)
         if (response.data && response.data.post) {
           const { post } = response.data;
           setPost(post);
@@ -33,10 +34,33 @@ const Like = ({ postId, userId }) => {
     return <div>Loading...</div>;
   }
 
+
+  const handleLikeClick = async () => {
+    try {
+      if (!loading) {
+        if (liked) {
+          const response = await axios.post(`http://localhost:9001/api/post/unlike/${postId}`, { userId  });
+          if (response.status === 200) {
+            setLiked(false);
+            setPost(prevPost => ({ ...prevPost, likes: prevPost.likes.filter(like => like !== userId) }));
+          } else {
+            console.log('error unliking');
+          }
+        } else {
+          await axios.post(`http://localhost:9001/api/post/like/${postId}`, { userId  });
+          setLiked(true);
+          setPost(prevPost => ({ ...prevPost, likes: [...prevPost.likes, userId] }));
+        }
+      }
+    } catch (error) {
+      console.error('Error liking/unliking post:', error);
+    }
+  };
+
   return (
     <div>
-      <button className='button'>
-        {liked ? <FaHeart /> : <FaRegHeart />}
+      <button className='button' onClick={handleLikeClick}>
+        {liked ? <FcLike /> :<FaRegHeart />}
       </button>
       <div className="commonRow">
         <div className="liked">
