@@ -62,6 +62,7 @@ function Users() {
           { userFollowId: userId }
         );
         followingState[userId] = true;
+        console.log(followingState)
       }
       setIsFollowing(followingState);
       
@@ -71,7 +72,7 @@ function Users() {
       console.error(error, "follow");
     }
   };
-
+console.log(userProfile);
   return (
     <>
       <div>
@@ -108,7 +109,7 @@ function Users() {
         </div>
         <div className="second-sec">
           <button className="item">{userPosts.length} <span>posts</span></button>
-          <button  className="item">0 followers</button>
+          <button  className="item">{userProfile?.followers?.length} followers</button>
           <button  className="item">0 following</button>      
         </div>
         <div className="dicription">

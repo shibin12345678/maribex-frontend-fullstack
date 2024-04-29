@@ -124,6 +124,7 @@
  .postRow{
      display: flex;
      justify-content: space-between;
+   
  }
  
 
@@ -196,7 +197,7 @@
  }
  .postContainer{
        margin-top: 130px;
-      margin-left: -700px;
+      margin-left: 900px;
       width: 400px;
       height: 470px;
      

@@ -3,6 +3,7 @@ import "../CreatePost/CreatePost.css";
 import { ToastContainer, toast } from 'react-toastify'; // Import toast
 import 'react-toastify/dist/ReactToastify.css'; // Import CSS
 import axios from "axios";
+import Sidebar from '../Sidebar/Sidebar';
 
 export const Createpost = () => {
     const [title, setTitle] = useState("");
@@ -36,6 +37,8 @@ export const Createpost = () => {
     };
 
     return (
+          <>
+            <Sidebar/>
         <div className='container postcontainer'>
             <form onSubmit={handleSubmit} className='row postform'>
                 <div className='col-sm-12 d-flex'>
@@ -70,6 +73,7 @@ export const Createpost = () => {
                 </div>
             </form>
         </div>
+        </>
     );
 };
 

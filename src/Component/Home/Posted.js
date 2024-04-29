@@ -77,7 +77,28 @@ function Posted({ postId, userId }) {
       console.error("Error posting comment:", error);
     }
   };
-
+  const handleSavePost = async (postId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:9001/api/post/save/${postId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId }), // Assuming userId is defined elsewhere
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to save post");
+      }
+  
+      // Optionally, you can update the UI to reflect that the post has been saved
+    } catch (error) {
+      console.error("Error saving post:", error);
+    }
+  };
+  
   return (
     <>
       <div className="main">
@@ -146,7 +167,7 @@ function Posted({ postId, userId }) {
                           <LuSend style={{marginLeft:"-30px",marginTop:"-15px"}}/>
                         </button>
                       </div>
-                      <img src={save} height="30px" />
+                      <img src={save} height="30px"  onClick={()=>handleSavePost(user._id)}/>
                     </div>
                     <div>
                       <ViewallComment postId={post._id} userId={user._id} />

@@ -51,7 +51,7 @@ const Search = () => {
           </div>
           <div>
             {filteredUsers.map(user => (
-              <div key={user._id} className='conversation' style={{ cursor: 'pointer' }} onClick={() => handleUserClick(user._id)}>
+              <div key={user._id} className='conversationn' style={{ cursor: 'pointer' }} onClick={() => handleUserClick(user._id)}>
                 <img src={user.profilePic}  className='conversationImgg' />
                 <span className="conversationName">{user.username}</span>
               </div>
