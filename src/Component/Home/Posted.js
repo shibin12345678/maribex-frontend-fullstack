@@ -27,7 +27,9 @@ function Posted({ postId, userId }) {
     const fetchPosts = async () => {
       try {
         const response = await fetch("http://localhost:9001/api/allpost");
+      
         const data = await response.json();
+        console.log("responseee",data)
         setPosts(data?.posts);
       } catch (error) {
         console.error("Error fetching posts:", error);
@@ -77,27 +79,7 @@ function Posted({ postId, userId }) {
       console.error("Error posting comment:", error);
     }
   };
-  const handleSavePost = async (postId) => {
-    try {
-      const response = await fetch(
-        `http://localhost:9001/api/post/save/${postId}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ userId }), // Assuming userId is defined elsewhere
-        }
-      );
-      if (!response.ok) {
-        throw new Error("Failed to save post");
-      }
-  
-      // Optionally, you can update the UI to reflect that the post has been saved
-    } catch (error) {
-      console.error("Error saving post:", error);
-    }
-  };
+ 
   
   return (
     <>
@@ -118,7 +100,7 @@ function Posted({ postId, userId }) {
                 </div>
               ))}
             </div>
-            <div>
+            <div className="container">
               {posts.map((post, index) => (
                 <div className="postContainer" key={index}>
                   <div className="postRow ">
@@ -148,9 +130,9 @@ function Posted({ postId, userId }) {
                             {timeSince(new Date(post.createdAt))} Ago
                           </span>
                         </div>
-                        <span className="PostDesc">
+                        {/* <span className="PostDesc">
                           Beast Inside Beats • Vibes
-                        </span>
+                        </span> */}
                       </div>
                     </div>
                     <img src={dot} height="20px" />
@@ -167,7 +149,7 @@ function Posted({ postId, userId }) {
                           <LuSend style={{marginLeft:"-30px",marginTop:"-15px"}}/>
                         </button>
                       </div>
-                      <img src={save} height="30px"  onClick={()=>handleSavePost(user._id)}/>
+                      {/* <img src={save} height="30px"  onClick={()=>handleSavePost(user._id)}/> */}
                     </div>
                     <div>
                       <ViewallComment postId={post._id} userId={user._id} />
@@ -242,7 +224,7 @@ function Posted({ postId, userId }) {
                         </span>
                       </div>
                     </div>
-                    <div className="switch">Follow</div>
+              
                   </div>
                 ))}
               </div>
