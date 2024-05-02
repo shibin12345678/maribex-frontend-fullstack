@@ -3,7 +3,8 @@ import Sidebar from './Sidebar';
 import axios from 'axios'; // Import Axios for making HTTP requests
 import "./Search.css";
 import { useNavigate } from 'react-router-dom';
-// import { useHistory } from 'react-router-dom'; // Import useHistory for navigation
+import io from 'socket.io-client';
+
 
 const Search = () => {
   const [users, setUsers] = useState([]);
