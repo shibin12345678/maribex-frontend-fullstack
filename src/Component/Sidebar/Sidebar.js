@@ -16,17 +16,18 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import io from 'socket.io-client';
 
 
 
 
- const Sidebar = () => {
-  const [user, setUser] = useState(null);
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const navigate=useNavigate();
-  
+   const Sidebar = () => {
+   const [user, setUser] = useState(null);
+   const [posts, setPosts] = useState([]);
+   const [loading, setLoading] = useState(true);
+   const [error, setError] = useState(null);
+   const navigate=useNavigate();
+
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
