@@ -3,6 +3,8 @@ import axios from 'axios';
 import "./Conversation.css";
 import { useParams } from 'react-router-dom';
 import Chat from './Chat'
+import io from 'socket.io-client';
+
 
 const Conversation = () => {
     const userId=localStorage.getItem("userId")
