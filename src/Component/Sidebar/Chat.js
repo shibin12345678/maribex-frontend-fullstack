@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import "./Chat.css";
-
-import io from 'socket.io-client';
-
+import {io} from "socket.io-client"
 
 const Chat = ({ currentChatUser }) => {
     const userId=localStorage.getItem("userId")
