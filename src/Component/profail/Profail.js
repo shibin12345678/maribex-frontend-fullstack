@@ -49,7 +49,9 @@ const Profail = () => {
         const fetchUserProfile = async () => {
             try {
                 const userId = localStorage.getItem('userId');
+                console.log(userId,"userID")
                 const response = await axios.get(`https://api.maribex.site/api/getUser/${userId}`);
+                console.log("res",response)
                 setUser(response.data.user);
                 setLoading(false);
             } catch (error) {
@@ -64,7 +66,10 @@ const Profail = () => {
         const fetchUserPosts = async () => {
             try {
                 const userId = localStorage.getItem('userId');
+            
                 const response = await axios.get(`https://api.maribex.site/api/post/${userId}`);
+               
+               
                 setPosts(response?.data?.posts);
             } catch (error) {
                 console.error("Error fetching user posts:", error);
@@ -88,7 +93,7 @@ const Profail = () => {
                     />
                 </div>
                 <div className="dp-side-box">
-                    <span className="idd-name">{user.username}</span>
+                    <span className="idd-name">{user?.username}</span>
                     <div>
                         <button className="butns" onClick={() => navigate("/EditProfail")}>Edit Profail</button>
                         <button className="butns">View archive</button>
@@ -97,9 +102,9 @@ const Profail = () => {
                 </div>
             </div>
             <div className="second-sec">
-                <button className="item">{posts.length} <span>post</span></button>
-                <button className="item">{user.followers.length}<span>followers</span></button>
-                <button className="item" onClick={handleOpen}>{user.following.length}<span>following</span></button>
+                <button className="item">{posts?.length} <span>post</span></button>
+                <button className="item">{user?.followers.length}<span>followers</span></button>
+                <button className="item" onClick={handleOpen}>{user?.following.length}<span>following</span></button>
                 <Modal
                     className='modall'
                     open={open}
@@ -114,8 +119,8 @@ const Profail = () => {
                             </div>
                             <div>
                                 {followingList.map((followingUser) => (
-                                    <div key={followingUser._id} className='userContainer'>
-                                        <img src={followingUser.profilePic} className='chatUserImg' alt='' />
+                                    <div key={followingUser?._id} className='userContainer'>
+                                        <img src={followingUser?.profilePic} className='chatUserImg' alt='' />
                                         <div style={{ marginLeft: "10px" }} className='uuu'>
                                             <p style={{ textAlign: "start", marginTop: "10px", fontSize: "15px" }} className='ttt'>{followingUser.username}</p>
                                         </div>

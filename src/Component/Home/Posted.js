@@ -29,7 +29,6 @@ function Posted({ postId, userId }) {
         const response = await fetch("https://api.maribex.site/api/allpost");
       
         const data = await response.json();
-        console.log("responseee",data)
         setPosts(data?.posts);
       } catch (error) {
         console.error("Error fetching posts:", error);
@@ -110,7 +109,7 @@ function Posted({ postId, userId }) {
                           className="postProfile "
                           src={post.postById?.profilePic}
                           onClick={() =>
-                            navigate(`/Users/${post.postById?._id}`)
+                            navigate(`/Users/${post?.postById?._id}`)
                           }
                           alt=""
                         />
@@ -120,14 +119,14 @@ function Posted({ postId, userId }) {
                           <span
                             className="postName"
                             onClick={() =>
-                              navigate(`/Users/${post.postById._id}`)
+                              navigate(`/Users/${post?.postById?._id}`)
                             }
                           >
-                            {post.postById.username}
+                            {post?.postById?.username}
                           </span>
                           <span className="postDay">
                             {" "}
-                            {timeSince(new Date(post.createdAt))} Ago
+                            {timeSince(new Date(post?.createdAt))} Ago
                           </span>
                         </div>
                         {/* <span className="PostDesc">
@@ -138,7 +137,7 @@ function Posted({ postId, userId }) {
                     <img src={dot} height="20px" />
                   </div>
                   <div>
-                    <img src={post.image} height="500px" className="img" />
+                    <img src={post?.image} height="500px" className="img" />
                      
                     <div className="postRow">
                       <div className="activity" style={{ display: "flex" }}>
