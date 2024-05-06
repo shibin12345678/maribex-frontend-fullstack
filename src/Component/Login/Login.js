@@ -13,8 +13,7 @@ const Login = () => {
     password: ''
   });
   const [error, setError] = useState('');
-
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,8 +42,7 @@ const Login = () => {
         setError('An error occurred while processing the request');
       }
     }
-  }; 
-  
+  };
 
   return (
     <>

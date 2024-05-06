@@ -41,7 +41,7 @@ const EditProfail = () => {
 
       const id = localStorage.getItem('userId');
 
-      const response = await axios.patch(`http://localhost:9001/api/updateProfile/${id}`, formDataToSend, {
+      const response = await axios.patch(`https://api.maribex.site/api/updateProfile/${id}`, formDataToSend, {
 
         headers: {
           'Content-Type': 'multipart/form-data'

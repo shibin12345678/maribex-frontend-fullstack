@@ -17,7 +17,7 @@ const Search = () => {
 
   const getAllUsers = async () => {
     try {
-      const response = await axios.get('http://localhost:9001/api/users');
+      const response = await axios.get('https://api.maribex.site/api/users');
       setUsers(response.data.Users);
     } catch (error) {
       console.error('Error fetching users:', error);

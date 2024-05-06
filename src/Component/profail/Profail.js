@@ -34,7 +34,7 @@ const Profail = () => {
         setOpen(true);
         try {
             const userId = localStorage.getItem('userId');
-            const response = await axios.get(`http://localhost:9001/api/followinglist/${userId}`);
+            const response = await axios.get(`https://api.maribex.site/api/followinglist/${userId}`);
             setFollowingList(response.data.user.following);
         } catch (error) {
             console.error("Error fetching following list:", error);
@@ -49,7 +49,7 @@ const Profail = () => {
         const fetchUserProfile = async () => {
             try {
                 const userId = localStorage.getItem('userId');
-                const response = await axios.get(`http://localhost:9001/api/getUser/${userId}`);
+                const response = await axios.get(`https://api.maribex.site/api/getUser/${userId}`);
                 setUser(response.data.user);
                 setLoading(false);
             } catch (error) {
@@ -64,7 +64,7 @@ const Profail = () => {
         const fetchUserPosts = async () => {
             try {
                 const userId = localStorage.getItem('userId');
-                const response = await axios.get(`http://localhost:9001/api/post/${userId}`);
+                const response = await axios.get(`https://api.maribex.site/api/post/${userId}`);
                 setPosts(response?.data?.posts);
             } catch (error) {
                 console.error("Error fetching user posts:", error);

@@ -28,7 +28,7 @@ import axios from 'axios';
     const fetchUserProfile = async () => {
       try {
         const userId = localStorage.getItem('userId');
-        const response = await axios.get(`http://localhost:9001/api/getUser/${userId}`);
+        const response = await axios.get(`https://api.maribex.site/api/getUser/${userId}`);
         setUser(response?.data?.user);
         
         setLoading(false);

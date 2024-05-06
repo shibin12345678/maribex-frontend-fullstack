@@ -16,7 +16,7 @@ const Chat = ({ currentChatUser }) => {
             try {
               const user2Id=currentChatUser._id;
               console.log(user2Id,"secondUserId")
-                const response = await axios.get(`http://localhost:9001/api/post/chat/msg/${userId}/${user2Id}`);
+                const response = await axios.get(`https://api.maribex.site/api/post/chat/msg/${userId}/${user2Id}`);
                 setMessages(response.data);
                 console.log(response)
             } catch (error) {
@@ -42,7 +42,7 @@ const Chat = ({ currentChatUser }) => {
         const fetchUserProfile = async () => {
           try {
             const userId = localStorage.getItem('userId');
-            const response = await axios.get(`http://localhost:9001/api/getUser/${userId}`);
+            const response = await axios.get(`https://api.maribex.site/api/getUser/${userId}`);
               console.log(response,"userdeatils")
             setUser(response.data.user);
            
@@ -70,7 +70,7 @@ const Chat = ({ currentChatUser }) => {
                 message:inputMessage,
 
            })
-            const response = await axios.post('http://localhost:9001/api/post/msg', {
+            const response = await axios.post('https://api.maribex.site/api/post/msg', {
                 from: userId,
                 to: user2Id,
                 message: inputMessage

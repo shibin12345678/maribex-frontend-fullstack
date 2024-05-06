@@ -11,7 +11,7 @@ const Like = ({ postId, userId }) => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await axios.get(`http://localhost:9001/api/postId/${postId}`);
+        const response = await axios.get(`https://api.maribex.site/api/postId/${postId}`);
         //  console.log("responseeee",response)
         if (response.data && response.data.post) {
           const { post } = response.data;
@@ -39,7 +39,7 @@ const Like = ({ postId, userId }) => {
     try {
       if (!loading) {
         if (liked) {
-          const response = await axios.post(`http://localhost:9001/api/post/unlike/${postId}`, { userId  });
+          const response = await axios.post(`https://api.maribex.site/api/post/unlike/${postId}`, { userId  });
           if (response.status === 200) {
             setLiked(false);
             setPost(prevPost => ({ ...prevPost, likes: prevPost.likes.filter(like => like !== userId) }));
@@ -47,7 +47,7 @@ const Like = ({ postId, userId }) => {
             console.log('error unliking');
           }
         } else {
-          await axios.post(`http://localhost:9001/api/post/like/${postId}`, { userId  });
+          await axios.post(`https://api.maribex.site/api/post/like/${postId}`, { userId  });
           setLiked(true);
           setPost(prevPost => ({ ...prevPost, likes: [...prevPost.likes, userId] }));
         }

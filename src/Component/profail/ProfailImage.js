@@ -37,7 +37,7 @@ const ProfailImage = ({ postId, userId }) => {
         const fetchUserPosts = async () => {
             try {
                 const userId = localStorage.getItem('userId');
-                const response = await axios.get(`http://localhost:9001/api/post/${userId}`);
+                const response = await axios.get(`https://api.maribex.site/api/${userId}`);
                
                 setPosts(response?.data?.posts);
             } catch (error) {
@@ -53,7 +53,7 @@ const ProfailImage = ({ postId, userId }) => {
   
     const handleDelete = async (postId) => {
       try {
-          const response = await axios.delete(`http://localhost:9001/api/post/${postId}`);
+          const response = await axios.delete(`https://api.maribex.site/api/post/${postId}`);
           console.log(response.data.message ,"delted"); // Log the response message from the server
           // Optionally, you can update the state to remove the deleted post from the UI
       } catch (error) {

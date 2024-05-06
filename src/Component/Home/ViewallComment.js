@@ -31,7 +31,7 @@ const ViewallComment = ({ postId, userId }) => {
 
     const handlePostComment = async (postId, userId) => {
       try {
-        const response = await fetch(`http://localhost:9001/api/post/comments/${postId}`, {
+        const response = await fetch(`https://api.maribex.site/api/post/comments/${postId}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ const ViewallComment = ({ postId, userId }) => {
     }, []);
     const fetchComments = async () => {
       try {
-        const response = await fetch(`http://localhost:9001/api/post/getcomments/${postId}`);
+        const response = await fetch(`https://api.maribex.site/api/post/getcomments/${postId}`);
         if (!response.ok) {
           throw new Error('Failed to fetch comments');
         }
@@ -70,7 +70,7 @@ const ViewallComment = ({ postId, userId }) => {
   useEffect(() => {
     const fetchPostData = async () => {
       try {
-        const response = await axios.get(`http://localhost:9001/api/postId/${postId}`);
+        const response = await axios.get(`https://api.maribex.site/api/postId/${postId}`);
         setPostData(response.data.post);
       } catch (error) {
         console.error('Error fetching post data:', error);

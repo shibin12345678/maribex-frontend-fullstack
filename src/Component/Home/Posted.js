@@ -26,7 +26,7 @@ function Posted({ postId, userId }) {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch("http://localhost:9001/api/allpost");
+        const response = await fetch("https://api.maribex.site/api/allpost");
       
         const data = await response.json();
         console.log("responseee",data)
@@ -42,7 +42,7 @@ function Posted({ postId, userId }) {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("http://localhost:9001/api/users");
+        const response = await fetch("https://api.maribex.site/api/users");
         const data = await response.json();
 
         if (response.ok) {
@@ -61,7 +61,7 @@ function Posted({ postId, userId }) {
   const handlePostComment = async (postId) => {
     try {
       const response = await fetch(
-        `http://localhost:9001/api/post/comments/${postId}`,
+        `https://api.maribex.site/api/post/comments/${postId}`,
         {
           method: "POST",
           headers: {

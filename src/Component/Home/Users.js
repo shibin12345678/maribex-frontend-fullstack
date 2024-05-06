@@ -30,7 +30,7 @@ function Users() {
 
   const fetchUserProfile = async () => {
     try {
-      const response = await axios.get(`http://localhost:9001/api/getUser/${id}`);
+      const response = await axios.get(`https://api.maribex.site/api/getUser/${id}`);
       setUserProfile(response.data.user);
     } catch (error) {
       console.error(error);
@@ -39,7 +39,7 @@ function Users() {
   
   const fetchUserPosts = async () => {
     try {
-      const response = await axios.get(`http://localhost:9001/api/post/${id}`);
+      const response = await axios.get(`https://api.maribex.site/api/post/${id}`);
       setUserPosts(response.data.posts);
     } catch (error) {
       console.error('Error fetching user posts:', error);
@@ -52,13 +52,13 @@ function Users() {
 
       if (followingState[userId]) {
         await axios.post(
-          `http://localhost:9001/api/unfollow/${logUserId}`,
+          `https://api.maribex.site/api/unfollow/${logUserId}`,
           { userUnfollowId: userId }
         );
         followingState[userId] = false;
       } else {
         await axios.post(
-          `http://localhost:9001/api/follow/${logUserId}`,
+          `https://api.maribex.site/api/follow/${logUserId}`,
           { userFollowId: userId }
         );
         followingState[userId] = true;
