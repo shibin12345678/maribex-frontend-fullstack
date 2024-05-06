@@ -17,10 +17,6 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-
-
-
-
    const Sidebar = () => {
    const [user, setUser] = useState(null);
    const [posts, setPosts] = useState([]);

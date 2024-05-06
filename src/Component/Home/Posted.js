@@ -187,11 +187,11 @@ function Posted({ postId, userId }) {
               <div className="commonRow">
                 <img src={user?.profilePic} alt="" className="postProfile" />
                 <div className="suggestionProfile">
-                  <a href={`/Users/${user._id}`} className="postName">
+                  <a href={`/Users/${user?._id}`} className="postName">
                     {user?.username}
                   </a>
                   <br />
-                  <a href={`/Users/${user._id}`} className="ellipsis">
+                  <a href={`/Users/${user?._id}`} className="ellipsis">
                     {user?.username}
                   </a>
                 </div>
