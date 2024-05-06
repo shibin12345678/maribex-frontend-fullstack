@@ -24,7 +24,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:9001/api/signin", formData);
+      const response = await axios.post("https://api.maribex.site/api/signin", formData);
       const { _id, name, email, username } = response.data;
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user', JSON.stringify({ _id, name, email, username }));

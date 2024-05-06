@@ -20,7 +20,7 @@ const Registration = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:9001/api/signup", formData);
+      const response = await axios.post("https://api.maribex.site/api/signup", formData);
       console.log('Registration successful:', response.data);
       navigate('/login');
 
