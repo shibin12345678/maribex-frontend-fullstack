@@ -110,7 +110,7 @@ function Posted({ postId, userId }) {
                           className="postProfile "
                           src={post.postById?.profilePic}
                           onClick={() =>
-                            navigate(`/Users/${post.postById._id}`)
+                            navigate(`/Users/${post.postById?._id}`)
                           }
                           alt=""
                         />
@@ -142,9 +142,9 @@ function Posted({ postId, userId }) {
                      
                     <div className="postRow">
                       <div className="activity" style={{ display: "flex" }}>
-                        <Like postId={post._id} userId={user._id} />
+                        <Like postId={post?._id} userId={user?._id} />
                       
-                        <Comment postId={post._id} userId={user._id} />
+                        <Comment postId={post?._id} userId={user?._id} />
                         <button className="button">
                           <LuSend style={{marginLeft:"-30px",marginTop:"-15px"}}/>
                         </button>
@@ -152,7 +152,7 @@ function Posted({ postId, userId }) {
                       {/* <img src={save} height="30px"  onClick={()=>handleSavePost(user._id)}/> */}
                     </div>
                     <div>
-                      <ViewallComment postId={post._id} userId={user._id} />
+                      <ViewallComment postId={post?._id} userId={user?._id} />
                       <div>
                         <div className="postRow">
                           <span className="addComment">
@@ -164,7 +164,7 @@ function Posted({ postId, userId }) {
                               onChange={(e) => setCommentText(e.target.value)}
                             />
                             <button
-                              onClick={() => handlePostComment(post._id)}
+                              onClick={() => handlePostComment(post?._id)}
                               style={{ border: "none" }}
                               id="btttttn"
                             >
@@ -205,7 +205,7 @@ function Posted({ postId, userId }) {
             <div>
               <div className="user-list">
                 {users.map((user) => (
-                  <div key={user._id} className="postRow pding">
+                  <div key={user?._id} className="postRow pding">
                     <div className="commonRow">
                       <div>
                         <img
@@ -215,7 +215,7 @@ function Posted({ postId, userId }) {
                         />
                       </div>
                       <div className="suggestionProfile">
-                        <a href={`/Users/${user._id}`} className="postName">
+                        <a href={`/Users/${user?._id}`} className="postName">
                           {user.username}
                         </a>
                         <br />
